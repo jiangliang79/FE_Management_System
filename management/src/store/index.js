@@ -14,7 +14,6 @@ const state = {
 
 const mutations = {
     getUserInfo(state, userInfo) {
-        console.log(userInfo);
         state.userInfo.username = userInfo.username;
         state.userInfo.type = userInfo.type;
         state.userInfo.userId = userInfo.userId;

@@ -7,3 +7,7 @@ export const userList = (data) => {
         "GET"
     );
 };
+
+export const deleteUser = (data) => {
+    return fetch('/api/system/management/user/delete',data,"POST")
+}
