@@ -6,6 +6,8 @@
 npm install
 ```
 
+普通运行执行前 2 句命令即可
+
 ### Compiles and hot-reloads for development
 
 ```
