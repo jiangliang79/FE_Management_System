@@ -2,8 +2,8 @@ const baseUrl = '';
 
 function Async(url = "", data = {}, type = "GET") {
     let authorization = "";
-    let tokenId = sessionStorage.getItem("tokenId") ? sessionStorage.getItem("tokenId") : null;
-
+    // let tokenId = sessionStorage.getItem("tokenId") ? sessionStorage.getItem("tokenId") : null;
+    let authentication = window.localStorage.getItem("authentication") ? window.localStorage.getItem("authentication") : null;
     this.url = url;
     this.data = data;
     this.type = type;
@@ -44,8 +44,8 @@ function Async(url = "", data = {}, type = "GET") {
                 Accept: "application/json",
                 "Content-Type": "application/json",
                 authorization,
-            }, tokenId ? {
-                tokenId
+            }, authentication ? {
+                authentication
             } : {}),
             mode: "cors",
             cache: "no-cache",
@@ -61,7 +61,9 @@ function Async(url = "", data = {}, type = "GET") {
         if (response.status == 200) {
             try {
                 responseJson = await response.json();
-            } catch (e) {}
+            } catch (e) {
+                //
+            }
         }
         this.runHttpProvider("response", response, responseJson);
         if (response.status == 200) {

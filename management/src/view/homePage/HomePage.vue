@@ -5,9 +5,9 @@
         <h2>实习管理系统</h2>
       </div>
       <div class="userInfo">
-        <el-avatar> user </el-avatar>
-        <span class="username">用户名</span>
-        <el-button size="small">退出</el-button>
+        <el-avatar>{{username}}</el-avatar>
+        <span class="username">{{username}}</span>
+        <el-button size="small" @click="loginOut">退出</el-button>
       </div>
     </div>
     <div class="content">
@@ -21,7 +21,7 @@
           </el-menu-item>
           <el-menu-item index="2" class="menu-item">
             <i class="el-icon-menu"></i>
-            <span slot="title">学生信息</span>
+            <span slot="title"><router-link to="/homePage/studentInfo" tag="span">学生信息</router-link></span>
           </el-menu-item>
           <el-submenu index="3" class="menu-item">
             <template slot="title">
@@ -50,18 +50,49 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
+import { loginOut } from './service';
 export default {
   data () {
     return {
 
     };
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      username: state => state.userInfo.username
+    })
+  },
   watch: {},
-  methods: {},
+  methods: {
+    async loginOut () {
+      try {
+        const resp = await loginOut({ username: this.username });
+        if (resp.status === 200) {
+          this.$router.push({ path: "/" });
+          window.localStorage.clear();
+        }
+      } catch (e) {
+        //
+      }
+    },
+    getUserInfo() {
+    const users = window.localStorage.getItem('userinfo').split('&');
+    let userInfo = {};
+    users.forEach(item => {
+      const rs = item.split('=');
+      const obj = {};
+      obj[rs[0]] = rs[1];
+      userInfo = Object.assign(userInfo, obj);
+    })
+    this.$store.dispatch('getUserInfo', userInfo);
+    }
+  },
   created () { },
-  mounted () { },
+  mounted () { 
+    this.getUserInfo();
+    
+  },
   beforeCreate () { },
   beforeMount () { },
   beforeUpdate () { },

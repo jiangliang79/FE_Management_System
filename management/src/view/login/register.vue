@@ -27,14 +27,14 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="egisterVisible = false">取 消</el-button>
-      <el-button type="primary" @click="egisterVisible = false">确 定</el-button>
+      <el-button @click="cancel">取 消</el-button>
+      <el-button type="primary" @click="handleOk">确 定</el-button>
     </div>
   </el-dialog>
 </template>
 
 <script>
-
+import { register } from './service';
 export default {
   components: {},
   data () {
@@ -76,6 +76,44 @@ export default {
   methods: {
     showModal () {
       this.registerVisible = true;
+    },
+    cancel () {
+      this.registerVisible = false;
+      this.resetForm();
+    },
+    async handleOk () {
+      try {
+        const params = {
+          username: this.form.username,
+          name: this.form.name,
+          sex: this.form.sex,
+          phone: this.form.phone,
+          type: this.form.type,
+          password: this.form.password,
+        }
+        const resp = await register(params);
+        if (resp.status === 200) {
+          this.registerVisible = false;
+          this.resetForm();
+          this.$message({
+            message: '注册成功！请登录',
+            type: 'success'
+          });
+        }
+        console.log(resp);
+
+      } catch (e) {
+        //
+      }
+
+    },
+    resetForm () {
+      this.username = '';
+      this.name = '';
+      this.phone = '';
+      this.password = '';
+      this.sex = 0;
+      this.type = 1;
     }
   },
   created () { },

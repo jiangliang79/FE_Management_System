@@ -1,9 +1,9 @@
 import fetch from '@/utils/fetch'
 
 export const login = (data) => {
-    fetch('/api/system/management/common/login', data, "POST")
+    return fetch('/api/system/management/common/login', data, "POST")
 }
 
-// export const register = (data) => {
-//     // fetch('')
-// }
+export const register = (data) => {
+    return fetch('/api/system/management/common/register', data, "POST")
+}

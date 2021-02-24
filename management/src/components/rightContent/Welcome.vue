@@ -1,5 +1,7 @@
 <template>
-  <div class="">欢迎进入实习管理系统</div>
+  <div class="welcome">
+    <h2>欢迎使用实习管理系统</h2>
+  </div>
 </template>
 
 <script>
@@ -26,4 +28,7 @@ export default {
 }
 </script>
 <style lang='css' scoped>
+.welcome h2 {
+  margin: 100px auto;
+}
 </style>

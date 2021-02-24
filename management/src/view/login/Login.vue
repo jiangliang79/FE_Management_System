@@ -48,6 +48,9 @@ export default {
     goToRegister () {
       this.$refs.register_modal.showModal()
     },
+    getUserInfo (userInfo) {
+      this.$store.dispatch('getUserInfo', userInfo);
+    },
     async login () {
       const params = {
         username: this.username,
@@ -55,13 +58,30 @@ export default {
       };
       const resp = await login(params);
       console.log(resp);
-      this.$router.push({
-        path: "/homePage/welcome"
-      })
+      if (resp.status === 200) {
+        if (resp.data.loginStatus === 0) {
+          this.username = resp.data.username;
+          window.localStorage.setItem('authentication', resp.data.authentication);
+          window.localStorage.setItem('userinfo',`userId=${resp.data.userId}&username=${resp.data.username}&type=${resp.data.type}`);
+          this.getUserInfo(resp.data);
+          this.$router.push({
+            path: "/homePage/welcome"
+          })
+        } else {
+          this.$message({
+            message: '用户名或密码不能为空',
+            type: 'error'
+          })
+        }
+      }
     }
   },
   created () { },
-  mounted () { },
+  mounted () { 
+    window.localStorage.getItem('authentication') && this.$router.push({
+            path: "/homePage/welcome"
+          })
+  },
   beforeCreate () { },
   beforeMount () { },
   beforeUpdate () { },

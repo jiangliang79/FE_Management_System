@@ -2,9 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router' // 引入vue-router
 
 import Login from '@/view/login/Login';
-import HomePage from '@/view/homePage/HomePage.vue';
-import Welcome from '@/components/rightContent/Welcome.vue';
-import UserManagement from '@/components/rightContent/UserManagement.vue'
 Vue.use(Router) // 在vue中注入Router
 
 export default new Router({
@@ -16,16 +13,21 @@ export default new Router({
         {
             path: '/homePage',
             name: 'homePage',
-            component: HomePage,
+            component: () => import('@/view/homePage/HomePage.vue'),
             children: [{
                     path: '/homePage/welcome',
                     name: 'welcome',
-                    component: Welcome,
+                    component: () => import('@/components/rightContent/Welcome.vue')
                 },
                 {
                     path: '/homePage/userManagement',
                     name: 'userManagement',
-                    component: UserManagement,
+                    component: () => import('@/components/rightContent/UserManagement.vue')
+                },
+                {
+                    path: '/homePage/studentInfo',
+                    name: 'studentInfo',
+                    component: () => import('@/components/rightContent/StudentInfo.vue')
                 }
             ]
         }
