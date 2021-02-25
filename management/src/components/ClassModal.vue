@@ -1,7 +1,7 @@
 <template>
   <el-dialog
-    :title="operatorType === 0 ? '添加专业信息' : '编辑专业信息'"
-    :visible.sync="proVisible"
+    :title="operatorType === 0 ? '添加班级信息' : '编辑班级信息'"
+    :visible.sync="classVisible"
     width="550px"
   >
     <el-form :model="form" :rules="rules">
@@ -15,6 +15,7 @@
           v-model="form.collegeId"
           placeholder="请选择所属学院"
           :style="{ width: '100%' }"
+          @change="getprofessionLists"
         >
           <el-option
             :label="item.collegeName"
@@ -25,25 +26,32 @@
         </el-select>
       </el-form-item>
       <el-form-item
-        label="专业名称:"
+        label="所属专业:"
+        prop="professionId"
         :label-width="formLabelWidth"
-        prop="professionName"
+        :style="{ 'text-align': 'left' }"
       >
-        <el-input
-          v-model="form.professionName"
-          placeholder="请输入专业名称"
-        ></el-input>
+        <el-select
+          v-model="form.professionId"
+          placeholder="请选择所属专业"
+          :style="{ width: '100%' }"
+        >
+          <el-option
+            :label="item.professionName"
+            :value="item.professionId"
+            v-for="item in professionList"
+            :key="item.professionId"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item
-        label="备注:"
+        label="班级名称:"
         :label-width="formLabelWidth"
-        prop="description"
+        prop="className"
       >
         <el-input
-          type="textarea"
-          :rows="2"
-          v-model="form.description"
-          placeholder="请输入备注"
+          v-model="form.className"
+          placeholder="请输入班级名称"
         ></el-input>
       </el-form-item>
     </el-form>
@@ -56,30 +64,31 @@
 </template>
 
 <script>
-import { getCollegeList, addProfession } from "@/view/homePage/service.js";
+import {
+  getCollegeList,
+  getProfessionList,
+  addClass,
+} from "@/view/homePage/service.js";
 export default {
   components: {},
   data() {
     return {
-      proVisible: false,
+      classVisible: false,
       operatorType: 0,
       collegeList: [],
-      professionId: 0,
+      professionList: [],
+      classId: 0,
       form: {
-        professionName: "",
-        name: "",
-        description: "",
-        password: "",
-        collegeId: 0,
+        className: "",
+        collegeId: "",
+        professionId: "",
       },
       formLabelWidth: "85px",
       rules: {
         collegeId: [{ required: true }],
-        professionName: [
+        professionId: [{ required: true }],
+        className: [
           { required: true, message: "请输入专业名称", trigger: "blur" },
-        ],
-        description: [
-          { required: false, message: "请输入备注", trigger: "blur" },
         ],
       },
     };
@@ -89,22 +98,22 @@ export default {
   methods: {
     // 打开弹窗
     showModal() {
-      this.proVisible = true;
+      this.classVisible = true;
     },
     cancel() {
-      this.proVisible = false;
+      this.classVisible = false;
       this.resetForm();
     },
     resetForm() {
       this.form.collegeId = this.collegeList[0].collegeId;
-      this.form.professionName = "";
-      this.form.description = "";
+      this.form.professionId = this.professionList[0].professionId;
+      this.form.className = "";
     },
     // 提交信息
     async handleOk() {
-      if (this.form.professionName === "") {
+      if (this.form.className === "") {
         this.$message({
-          message: "请输入专业名称",
+          message: "请输入班级名称",
           type: "error",
         });
         return;
@@ -113,28 +122,27 @@ export default {
         let params = {
           operatorType: this.operatorType,
           collegeId: this.form.collegeId,
-          professionName: this.form.professionName,
+          className: this.form.className,
+          professionId: this.form.professionId,
         };
         params = Object.assign(
           params,
-          this.operatorType === 1
-            ? { professionId: this.form.professionId }
-            : {}
+          this.operatorType === 1 ? { classId: this.form.classId } : {}
         );
-        const resp = await addProfession(params);
+        const resp = await addClass(params);
         if (resp.status === 200) {
           this.$message({
             message: this.operatorType === 0 ? "添加成功" : "编辑成功",
             type: "success",
           });
-          this.proVisible = false;
+          this.classVisible = false;
           this.resetForm();
           this.$parent.getDataList();
         }
       } catch (e) {}
     },
     //请求下拉框里的学院列表
-    async getdataList() {
+    async getCollegeLists() {
       try {
         const params = {
           isAll: true,
@@ -143,16 +151,24 @@ export default {
         if (resp.status === 200) {
           this.collegeList = resp.data.list;
           this.form.collegeId = this.collegeList[0].collegeId;
+          this.getprofessionLists();
         }
-      } catch (e) {
-      } finally {
-        this.loaded = true;
+      } catch (e) {}
+    },
+    // 请求对应学院的专业列表
+    async getprofessionLists() {
+      const params = {
+        collegeId: this.form.collegeId,
+      };
+      const resp = await getProfessionList(params);
+      if (resp.status === 200) {
+        this.professionList = resp.data.list;
       }
     },
   },
   created() {},
   mounted() {
-    this.getdataList();
+    this.getCollegeLists();
   },
   beforeCreate() {},
   beforeMount() {},

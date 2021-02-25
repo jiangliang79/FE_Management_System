@@ -38,6 +38,11 @@ export default new Router({
                     path: '/homePage/profession',
                     name: 'profession',
                     component: () => import('@/view/homePage/Profession.vue')
+                },
+                {
+                    path: '/homePage/class',
+                    name: 'class',
+                    component: () => import('@/view/homePage/Class.vue')
                 }
             ]
         }

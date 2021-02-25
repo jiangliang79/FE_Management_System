@@ -37,3 +37,11 @@ export const getProfessionList = (data) => {
 export const addProfession = (data) => {
     return fetch('/api/system/management/profession/add', data, "POST")
 }
+// 获取班级列表
+export const getClassList = (data) => {
+    return fetch('/api/system/management/class/list',data, "GET")
+}
+ // 添加或编辑班级
+export const addClass = (data) => {
+    return fetch('/api/system/management/class/add', data, "POST")
+}

@@ -4,6 +4,7 @@
       <el-input
         v-model="search"
         size="medium"
+        prefix-icon="el-icon-search"
         :style="{ width: '500px' }"
         placeholder="请输入学院名称"
         @keyup.enter.native="searchData"

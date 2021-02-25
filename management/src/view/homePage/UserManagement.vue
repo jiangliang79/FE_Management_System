@@ -4,6 +4,7 @@
       <el-input
         v-model="search"
         size="medium"
+        prefix-icon="el-icon-search"
         :style="{ width: '500px' }"
         placeholder="请输入用户账号或昵称搜索"
         @keyup.enter.native="searchData"

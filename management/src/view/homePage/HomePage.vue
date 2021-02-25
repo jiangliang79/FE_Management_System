@@ -49,7 +49,11 @@
                 >专业管理</router-link
               ></el-menu-item
             >
-            <el-menu-item index="3-3">班级管理</el-menu-item>
+            <el-menu-item index="3-3">
+              <router-link to="/homePage/class" tag="span"
+                >班级管理</router-link
+              >
+            </el-menu-item>
           </el-submenu>
           <el-submenu index="4" class="menu-item">
             <template slot="title">
