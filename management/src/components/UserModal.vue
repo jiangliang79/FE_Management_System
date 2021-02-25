@@ -1,5 +1,9 @@
 <template>
-  <el-dialog title="添加用户信息" :visible.sync="addUserVisible" width="550px">
+  <el-dialog
+    :title="operatorType === 0 ? '添加用户信息' : '编辑用户信息'"
+    :visible.sync="addUserVisible"
+    width="550px"
+  >
     <el-form :model="form" :rules="rules">
       <el-form-item
         label="用户类型:"
@@ -13,6 +17,8 @@
           :style="{ width: '100%' }"
         >
           <el-option label="管理员" :value="0"></el-option>
+          <el-option label="学生" :value="1"></el-option>
+          <el-option label="老师" :value="2"></el-option>
           <el-option label="二级学院" :value="3"></el-option>
         </el-select>
       </el-form-item>
@@ -22,7 +28,12 @@
       <el-form-item label="昵称:" :label-width="formLabelWidth" prop="name">
         <el-input v-model="form.name" placeholder="请输入昵称"></el-input>
       </el-form-item>
-      <el-form-item label="密码:" :label-width="formLabelWidth" prop="password">
+      <el-form-item
+        label="密码:"
+        :label-width="formLabelWidth"
+        prop="password"
+        v-if="operatorType === 0"
+      >
         <el-input
           v-model="form.password"
           placeholder="请输入密码"
@@ -57,6 +68,7 @@ export default {
   data() {
     return {
       addUserVisible: false,
+      operatorType: 0,
       form: {
         username: "",
         name: "",

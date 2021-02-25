@@ -82,13 +82,18 @@ export default {
   watch: {},
   methods: {
     addUser() {
+      this.$refs.user_modal.operatorType = 0;
+      this.$refs.user_modal.resetForm();
       this.$refs.user_modal.showModal();
     },
     searchData() {
       this.getUserList();
     },
     edit(data) {
-      console.log(data);
+      // console.log(data);
+      this.$refs.user_modal.operatorType = 1;
+      this.$refs.user_modal.form = data;
+      this.$refs.user_modal.showModal();
     },
     async deleteUser(data) {
       const params = {
