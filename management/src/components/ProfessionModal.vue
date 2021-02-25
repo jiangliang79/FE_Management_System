@@ -102,6 +102,13 @@ export default {
     },
     // 提交信息
     async handleOk() {
+      if (this.professionName === "") {
+        this.$message({
+          message: "请输入专业名称",
+          type: "error",
+        });
+        return;
+      }
       try {
         let params = {
           operatorType: this.operatorType,

@@ -30,7 +30,10 @@
             <el-button size="mini" type="primary" @click="edit(scope.row)"
               >编辑</el-button
             >
-            <el-button size="mini" type="danger" @click="deleteUser(scope.row)"
+            <el-button
+              size="mini"
+              type="danger"
+              @click="openDeleteModal(scope.row)"
               >删除</el-button
             >
           </template>
@@ -48,6 +51,7 @@ import Table from "@/components/Table.vue";
 import moment from "moment";
 import UserModal from "@/components/UserModal.vue";
 import ResetPasswordModal from "@/components/ResetPasswordModal.vue";
+import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,
@@ -115,6 +119,9 @@ export default {
       this.$refs.user_modal.operatorType = 1;
       this.$refs.user_modal.form = data;
       this.$refs.user_modal.showModal();
+    },
+    openDeleteModal(data) {
+      delModal(this.deleteUser, data, data.username);
     },
     async deleteUser(data) {
       const params = {

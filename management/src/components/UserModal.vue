@@ -101,7 +101,40 @@ export default {
       this.addUserVisible = false;
       this.resetForm();
     },
+    validate() {
+      if (this.form.username === "") {
+        return {
+          error: "请输入账号",
+          code: 0,
+        };
+      }
+      if (this.form.name === "") {
+        return {
+          error: "请输入昵称",
+          code: 0,
+        };
+      }
+      if (this.operatorType === 0 && this.form.password === "") {
+        return {
+          error: "请输入密码",
+          code: 0,
+        };
+      } else {
+        return {
+          error: "",
+          code: 1,
+        };
+      }
+    },
     async handleOk() {
+      const val = this.validate();
+      if (val.code === 0) {
+        this.$message({
+          message: val.error,
+          type: "error",
+        });
+        return;
+      }
       let params = {
         username: this.form.username,
         userType: this.form.userType,

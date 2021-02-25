@@ -23,7 +23,7 @@
             <el-button
               size="mini"
               type="danger"
-              @click="deleteCollege(scope.row)"
+              @click="openDeleteModal(scope.row)"
               >删除</el-button
             >
           </template>
@@ -37,6 +37,7 @@
 import { getCollegeList, deleteOrganization } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
+import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,
@@ -76,6 +77,9 @@ export default {
       this.pageNo = 1;
       this.pageSize = 10;
       this.getdataList();
+    },
+    openDeleteModal(data) {
+      delModal(this.deleteCollege, data, data.collegeName);
     },
     async deleteCollege(data) {
       const resp = await deleteOrganization({ type: 1, id: data.collegeId });

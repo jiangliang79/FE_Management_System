@@ -50,7 +50,13 @@ export default {
       this.password = "";
     },
     async handleOk() {
-      console.log(this.$props.userId);
+      if (this.password === "") {
+        this.$message({
+          message: "请输入新密码",
+          type: "error",
+        });
+        return;
+      }
       const params = {
         password: this.password,
         userId: this.$props.userId,

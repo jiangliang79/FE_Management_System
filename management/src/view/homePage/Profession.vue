@@ -24,7 +24,7 @@
             <el-button size="mini" type="primary" @click="editPro(scope.row)"
               >编辑</el-button
             >
-            <el-button size="mini" type="danger" @click="deletePro(scope.row)"
+            <el-button size="mini" type="danger" @click="openDeleteModal(scope.row)"
               >删除</el-button
             >
           </template>
@@ -41,6 +41,7 @@ import Table from "@/components/Table.vue";
 import ProfessionModal from "@/components/ProfessionModal.vue";
 import moment from "moment";
 import { getProfessionList, deleteOrganization } from "./service";
+import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,
@@ -99,6 +100,9 @@ export default {
       this.$refs.pro_modal.operatorType = 1;
       this.$refs.pro_modal.form = data;
       this.$refs.pro_modal.showModal();
+    },
+    openDeleteModal(data) {
+      delModal(this.deletePro, data, data.professionName);
     },
     async deletePro(data) {
       try {
