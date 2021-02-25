@@ -68,6 +68,9 @@ export default {
         {
           prop: "userType",
           label: "用户类型",
+          formatter: (row, column, cellValue, index) => {
+            return this.getUserType(cellValue);
+          },
         },
         {
           prop: "username",
@@ -84,6 +87,9 @@ export default {
         {
           prop: "createTime",
           label: "录入时间",
+          formatter: (row, column, cellValue, index) => {
+            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+          },
         },
       ],
     };
@@ -91,7 +97,6 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    showResetPasswordModal() {},
     async resetPassword(userId) {
       this.selectUserId = userId;
       this.$refs.reset_modal.showModal();
@@ -102,6 +107,8 @@ export default {
       this.$refs.user_modal.showModal();
     },
     searchData() {
+      this.pageNo = 1;
+      this.pageSize = 10;
       this.getUserList();
     },
     edit(data) {
@@ -133,16 +140,7 @@ export default {
         };
         const resp = await userList(params);
         if (resp.status === 200) {
-          this.userList = resp.data.list.map((item) => {
-            return {
-              username: item.username,
-              userType: item.userType,
-              name: item.name,
-              userId: item.userId,
-              description: item.description,
-              createTime: moment(item.createTime).format("YYYY-MM-DD hh:mm:ss"),
-            };
-          });
+          this.userList = resp.data.list;
           this.total = resp.data.total;
         }
       } catch (e) {
@@ -151,10 +149,27 @@ export default {
         this.loaded = true;
       }
     },
+    // id 和name 映射
+    getUserType(type) {
+      switch (type) {
+        case 0:
+          return "管理员";
+        case 1:
+          return "学生";
+        case 2:
+          return "老师";
+        case 3:
+          return "学院";
+        default:
+          return "";
+      }
+    },
+    // 改变页码
     handleSizeChange(pageSize) {
       this.pageSize = pageSize;
       this.getUserList();
     },
+    // 改变页码
     handleCurrentChange(pageNo) {
       this.pageNo = pageNo;
       this.getUserList();

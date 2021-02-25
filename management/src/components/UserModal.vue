@@ -116,7 +116,7 @@ export default {
       const resp = await addUser(params);
       if (resp.status === 200) {
         this.$message({
-          message: "添加成功",
+          message: this.operatorType === 0 ? "添加成功" : "编辑成功",
           type: "success",
         });
         this.addUserVisible = false;
@@ -124,6 +124,7 @@ export default {
         this.$parent.getUserList();
       }
     },
+    // 重置表单
     resetForm() {
       this.form = {
         username: "",
@@ -134,15 +135,7 @@ export default {
       };
     },
   },
-  created() {},
   mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

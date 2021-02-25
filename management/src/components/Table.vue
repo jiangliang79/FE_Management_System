@@ -1,7 +1,6 @@
 <template>
   <div class="">
     <el-table
-      row-key="userId"
       :data="data"
       :style="{ width: '100%' }"
       :default-sort="{ prop: 'createTime', order: 'descending' }"
@@ -11,6 +10,7 @@
         :label="item.label"
         v-for="item in columns"
         :key="item.label"
+        :formatter="item.formatter"
       >
       </el-table-column>
       <slot></slot>

@@ -28,6 +28,16 @@ export default new Router({
                     path: '/homePage/studentInfo',
                     name: 'studentInfo',
                     component: () => import('@/view/homePage/StudentInfo.vue')
+                },
+                {
+                    path: '/homePage/department',
+                    name: 'department',
+                    component: () => import('@/view/homePage/Department.vue')
+                },
+                {
+                    path: '/homePage/profession',
+                    name: 'profession',
+                    component: () => import('@/view/homePage/Profession.vue')
                 }
             ]
         }
