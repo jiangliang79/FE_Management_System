@@ -1,8 +1,9 @@
 <template>
   <div class="">
     <el-table
+      row-key="userId"
       :data="data"
-      style="width: 100%"
+      :style="{ width: '100%' }"
       :default-sort="{ prop: 'createTime', order: 'descending' }"
     >
       <el-table-column
@@ -13,7 +14,7 @@
       >
       </el-table-column>
       <!-- <el-table-column prop="options" label="操作" key="options"> -->
-        <slot></slot>
+      <slot></slot>
       <!-- </el-table-column> -->
     </el-table>
     <el-pagination

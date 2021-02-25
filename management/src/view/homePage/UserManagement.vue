@@ -1,6 +1,15 @@
 <template>
   <div class="user-manage">
-    <div class="option"></div>
+    <div class="serach">
+      <el-input
+        v-model="search"
+        size="medium"
+        :style="{ width: '500px' }"
+        placeholder="请输入搜索内容"
+        @keyup.enter.native="searchData"
+      />
+      <el-button type="primary" @click="addUser">添加</el-button>
+    </div>
     <div class="table">
       <Table
         :data="userList"
@@ -22,23 +31,26 @@
         </el-table-column>
       </Table>
     </div>
+    <UserModal ref="user_modal" />
   </div>
 </template>
 
 <script>
-import { userList, deleteUser } from "../service";
-import Table from "../Table";
+import { userList, deleteUser } from "./service";
+import Table from "@/components/Table.vue";
 import moment from "moment";
+import UserModal from "@/components/UserModal.vue";
 export default {
   components: {
     Table,
+    UserModal,
   },
   data() {
     return {
       loading: false,
       loaded: false,
       pageNo: 1,
-      pageSize: 20,
+      pageSize: 10,
       search: "",
       userList: [],
       total: 0,
@@ -63,16 +75,18 @@ export default {
           prop: "createTime",
           label: "录入时间",
         },
-        // {
-        //   prop: "option",
-        //   label: "操作",
-        // },
       ],
     };
   },
   computed: {},
   watch: {},
   methods: {
+    addUser() {
+      this.$refs.user_modal.showModal();
+    },
+    searchData() {
+      this.getUserList();
+    },
     edit(data) {
       console.log(data);
     },
@@ -143,4 +157,11 @@ export default {
 };
 </script>
 <style lang='css' scoped>
+.user-manage .serach {
+  display: flex;
+  justify-content: space-between;
+}
+.table {
+  margin-top: 20px;
+}
 </style>

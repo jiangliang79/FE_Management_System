@@ -8,20 +8,30 @@
         <div>
           <div class="item">
             <span>账号：</span>
-            <el-input v-model="username" placeholder="请输入账号" :style="{'width' : '85%'}"></el-input>
+            <el-input
+              v-model="username"
+              placeholder="请输入账号"
+              :style="{ width: '85%' }"
+            ></el-input>
           </div>
           <div class="item">
             <span>密码：</span>
-            <el-input placeholder="请输入密码" v-model="password" show-password :style="{'width' : '85%'}"></el-input>
+            <el-input
+              placeholder="请输入密码"
+              v-model="password"
+              show-password
+              :style="{ width: '85%' }"
+            ></el-input>
           </div>
-          <div class="tips">没有账号?
-            <el-button type="text" @click="goToRegister">
-              去注册
-            </el-button>
+          <div class="tips">
+            没有账号?
+            <el-button type="text" @click="goToRegister"> 去注册 </el-button>
           </div>
         </div>
         <div class="login-btn">
-          <el-button type="primary" :style="{'width': '70%'}" @click="login">登录</el-button>
+          <el-button type="primary" :style="{ width: '70%' }" @click="login"
+            >登录</el-button
+          >
         </div>
       </div>
     </div>
@@ -30,66 +40,73 @@
 </template>
 
 <script>
-import RegisterModal from './register';
-import { login } from './service';
+import RegisterModal from "./register";
+import { login } from "./service";
 export default {
   components: {
-    RegisterModal
+    RegisterModal,
   },
-  data () {
+  data() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
   },
   computed: {},
   watch: {},
   methods: {
-    goToRegister () {
-      this.$refs.register_modal.showModal()
+    goToRegister() {
+      this.$refs.register_modal.showModal();
     },
-    getUserInfo (userInfo) {
-      this.$store.dispatch('getUserInfo', userInfo);
+    getUserInfo(userInfo) {
+      this.$store.dispatch("getUserInfo", userInfo);
     },
-    async login () {
+    async login() {
       const params = {
         username: this.username,
-        password: this.password
+        password: this.password,
       };
       const resp = await login(params);
       console.log(resp);
       if (resp.status === 200) {
         if (resp.data.loginStatus === 0) {
           this.username = resp.data.username;
-          window.localStorage.setItem('authentication', resp.data.authentication);
-          window.localStorage.setItem('userinfo',`userId=${resp.data.userId}&username=${resp.data.username}&type=${resp.data.type}`);
+          window.localStorage.setItem(
+            "authentication",
+            resp.data.authentication
+          );
+          window.localStorage.setItem(
+            "userinfo",
+            `userId=${resp.data.userId}&username=${resp.data.username}&type=${resp.data.type}`
+          );
           this.getUserInfo(resp.data);
           this.$router.push({
-            path: "/homePage/welcome"
-          })
+            path: "/homePage/welcome",
+          });
         } else {
           this.$message({
-            message: '用户名或密码不能为空',
-            type: 'error'
-          })
+            message: "用户名或密码不能为空",
+            type: "error",
+          });
         }
       }
-    }
+    },
   },
-  created () { },
-  mounted () { 
-    window.localStorage.getItem('authentication') && this.$router.push({
-            path: "/homePage/welcome"
-          })
+  created() {},
+  mounted() {
+    window.localStorage.getItem("authentication") &&
+      this.$router.push({
+        path: "/homePage/welcome",
+      });
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
-}
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
+};
 </script>
 <style lang='css' scoped>
 .loginPage {

@@ -17,17 +17,17 @@ export default new Router({
             children: [{
                     path: '/homePage/welcome',
                     name: 'welcome',
-                    component: () => import('@/components/rightContent/Welcome.vue')
+                    component: () => import('@/view/homePage/Welcome.vue')
                 },
                 {
                     path: '/homePage/userManagement',
                     name: 'userManagement',
-                    component: () => import('@/components/rightContent/UserManagement.vue')
+                    component: () => import('@/view/homePage//UserManagement.vue')
                 },
                 {
                     path: '/homePage/studentInfo',
                     name: 'studentInfo',
-                    component: () => import('@/components/rightContent/StudentInfo.vue')
+                    component: () => import('@/view/homePage/StudentInfo.vue')
                 }
             ]
         }

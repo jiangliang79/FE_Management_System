@@ -5,23 +5,34 @@
         <h2>实习管理系统</h2>
       </div>
       <div class="userInfo">
-        <el-avatar>{{username}}</el-avatar>
-        <span class="username">{{username}}</span>
+        <el-avatar>{{ username }}</el-avatar>
+        <span class="username">{{ username }}</span>
         <el-button size="small" @click="loginOut">退出</el-button>
       </div>
     </div>
     <div class="content">
       <div class="leftBar">
-        <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+        <el-menu
+          class="el-menu-vertical-demo"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
           <el-menu-item index="1" class="menu-item">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-s-custom"></i>
             <span slot="title">
-              <router-link to="/homePage/userManagement" tag="span">用户管理</router-link>
+              <router-link to="/homePage/userManagement" tag="span"
+                >用户管理</router-link
+              >
             </span>
           </el-menu-item>
           <el-menu-item index="2" class="menu-item">
             <i class="el-icon-menu"></i>
-            <span slot="title"><router-link to="/homePage/studentInfo" tag="span">学生信息</router-link></span>
+            <span slot="title"
+              ><router-link to="/homePage/studentInfo" tag="span"
+                >学生信息</router-link
+              ></span
+            >
           </el-menu-item>
           <el-submenu index="3" class="menu-item">
             <template slot="title">
@@ -50,22 +61,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { loginOut } from './service';
+import { mapState } from "vuex";
+import { loginOut } from "./service";
 export default {
-  data () {
-    return {
-
-    };
+  data() {
+    return {};
   },
   computed: {
     ...mapState({
-      username: state => state.userInfo.username
-    })
+      username: (state) => state.userInfo.username,
+    }),
   },
   watch: {},
   methods: {
-    async loginOut () {
+    async loginOut() {
       try {
         const resp = await loginOut({ username: this.username });
         if (resp.status === 200) {
@@ -77,30 +86,29 @@ export default {
       }
     },
     getUserInfo() {
-    const users = window.localStorage.getItem('userinfo').split('&');
-    let userInfo = {};
-    users.forEach(item => {
-      const rs = item.split('=');
-      const obj = {};
-      obj[rs[0]] = rs[1];
-      userInfo = Object.assign(userInfo, obj);
-    })
-    this.$store.dispatch('getUserInfo', userInfo);
-    }
+      const users = window.localStorage.getItem("userinfo").split("&");
+      let userInfo = {};
+      users.forEach((item) => {
+        const rs = item.split("=");
+        const obj = {};
+        obj[rs[0]] = rs[1];
+        userInfo = Object.assign(userInfo, obj);
+      });
+      this.$store.dispatch("getUserInfo", userInfo);
+    },
   },
-  created () { },
-  mounted () { 
+  created() {},
+  mounted() {
     this.getUserInfo();
-    
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
-}
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
+};
 </script>
 <style scoped>
 .homePage {
@@ -108,6 +116,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  flex-flow: column;
 }
 .homePage .header {
   height: 70px;
@@ -130,6 +139,7 @@ export default {
 .content {
   display: flex;
   flex: 1;
+  flex-flow: row;
 }
 .content .leftBar {
   width: 200px;
