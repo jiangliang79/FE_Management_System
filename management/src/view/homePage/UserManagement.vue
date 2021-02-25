@@ -21,6 +21,12 @@
       >
         <el-table-column label="操作">
           <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="primary"
+              @click="resetPassword(scope.row.userId)"
+              >重置密码</el-button
+            >
             <el-button size="mini" type="primary" @click="edit(scope.row)"
               >编辑</el-button
             >
@@ -32,6 +38,7 @@
       </Table>
     </div>
     <UserModal ref="user_modal" />
+    <ResetPasswordModal ref="reset_modal" :userId="selectUserId" />
   </div>
 </template>
 
@@ -40,10 +47,12 @@ import { userList, deleteUser } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
 import UserModal from "@/components/UserModal.vue";
+import ResetPasswordModal from "@/components/ResetPasswordModal.vue";
 export default {
   components: {
     Table,
     UserModal,
+    ResetPasswordModal,
   },
   data() {
     return {
@@ -54,6 +63,7 @@ export default {
       search: "",
       userList: [],
       total: 0,
+      selectUserId: 0,
       columns: [
         {
           prop: "userType",
@@ -81,6 +91,11 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    showResetPasswordModal() {},
+    async resetPassword(userId) {
+      this.selectUserId = userId;
+      this.$refs.reset_modal.showModal();
+    },
     addUser() {
       this.$refs.user_modal.operatorType = 0;
       this.$refs.user_modal.resetForm();
@@ -90,7 +105,6 @@ export default {
       this.getUserList();
     },
     edit(data) {
-      // console.log(data);
       this.$refs.user_modal.operatorType = 1;
       this.$refs.user_modal.form = data;
       this.$refs.user_modal.showModal();

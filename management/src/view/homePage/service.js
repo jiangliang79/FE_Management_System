@@ -5,16 +5,17 @@ export const loginOut = (data) => {
 }
 
 export const userList = (data) => {
-    return fetch(
-        `/api/system/management/user/list`,
-        data,
-        "GET"
-    );
+    return fetch('/api/system/management/user/list',data,"GET");
 };
 
 export const addUser = (data) => {
     return fetch('/api/system/management/user/add',data,"POST")
 }
+
 export const deleteUser = (data) => {
     return fetch('/api/system/management/user/delete',data,"POST")
+}
+
+export const ediPassword = (data) => {
+    return fetch('/api/system/management/user/password/reset',data,"POST")
 }

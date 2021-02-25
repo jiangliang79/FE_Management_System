@@ -13,9 +13,7 @@
         :key="item.label"
       >
       </el-table-column>
-      <!-- <el-table-column prop="options" label="操作" key="options"> -->
       <slot></slot>
-      <!-- </el-table-column> -->
     </el-table>
     <el-pagination
       background
@@ -59,13 +57,8 @@ export default {
   },
   components: {},
   data() {
-    return {
-      // userList: [],
-      // columns : [],
-    };
+    return {};
   },
-  computed: {},
-  watch: {},
   methods: {
     handleSizeChange(pageSize) {
       this.$parent.handleSizeChange(pageSize);
@@ -74,15 +67,6 @@ export default {
       this.$parent.handleCurrentChange(pageNo);
     },
   },
-  created() {},
-  mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>
