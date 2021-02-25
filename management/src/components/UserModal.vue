@@ -102,9 +102,18 @@ export default {
       this.resetForm();
     },
     async handleOk() {
-      const params = Object.assign(this.form, { operatorType: 0 });
+      let params = {
+        username: this.form.username,
+        userType: this.form.userType,
+        name: this.form.name,
+        description: this.form.description,
+        operatorType: this.operatorType,
+      };
+      params = Object.assign(
+        params,
+        this.operatorType === 0 ? { password: this.password } : {}
+      );
       const resp = await addUser(params);
-      console.log(resp);
       if (resp.status === 200) {
         this.$message({
           message: "添加成功",

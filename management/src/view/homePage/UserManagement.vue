@@ -5,7 +5,7 @@
         v-model="search"
         size="medium"
         :style="{ width: '500px' }"
-        placeholder="请输入搜索内容"
+        placeholder="请输入用户账号或昵称搜索"
         @keyup.enter.native="searchData"
       />
       <el-button type="primary" @click="addUser">添加</el-button>
@@ -130,8 +130,6 @@ export default {
             };
           });
           this.total = resp.data.total;
-
-          console.log(resp);
         }
       } catch (e) {
       } finally {
