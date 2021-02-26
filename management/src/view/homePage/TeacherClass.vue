@@ -6,10 +6,9 @@
         prefix-icon="el-icon-search"
         size="medium"
         :style="{ width: '500px' }"
-        placeholder="请输入教师名称/班级名称搜索"
+        placeholder="请输入教师名称 / 班级名称搜索"
         @keyup.enter.native="searchData"
       />
-      <el-button type="primary" @click="addClass">添加</el-button>
     </div>
     <div class="table">
       <Table
@@ -29,21 +28,18 @@
         </el-table-column>
       </Table>
     </div>
-    <ClassModal ref="class_modal"/>
     </div>
   </div>
 </template>
 
 <script>
 import Table from "@/components/Table.vue";
-import ClassModal from "@/components/ClassModal.vue";
 import moment from "moment";
 import { getTeacherClassList, deleteTeacherClass } from "./service";
 import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,
-    ClassModal,
   },
   data() {
     return {

@@ -57,7 +57,11 @@ export const getTeacherClassList = (data) => {
 export const deleteTeacherClass = (data) => {
     return fetch('/api/system/management/teacher/class/delete',data, "POST")
 }
-
+// 分配班级
 export const classDivid = (data) => {
     return fetch('/api/system/management/class/divide',data,"POST")
+}
+// 学生信息列表
+export const getStudentList = (data) => {
+    return fetch('/api/system/management/student/list', data, "GET")
 }

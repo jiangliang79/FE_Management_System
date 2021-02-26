@@ -27,7 +27,7 @@
             </span>
           </el-menu-item>
           <el-menu-item index="2" class="menu-item">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-user-solid"></i>
             <span slot="title"
               ><router-link to="/homePage/studentInfo" tag="span"
                 >学生信息</router-link

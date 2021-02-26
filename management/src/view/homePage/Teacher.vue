@@ -6,7 +6,7 @@
         prefix-icon="el-icon-search"
         size="medium"
         :style="{ width: '500px' }"
-        placeholder="请输入教师名称/账号"
+        placeholder="请输入教师名称 / 账号"
         @keyup.enter.native="searchData"
       />
       <!-- <el-button type="primary" @click="addClass">添加</el-button> -->

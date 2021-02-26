@@ -6,7 +6,7 @@
         size="medium"
         prefix-icon="el-icon-search"
         :style="{ width: '500px' }"
-        placeholder="请输入专业名称/学院名称搜索"
+        placeholder="请输入专业名称 / 学院名称搜索"
         @keyup.enter.native="searchData"
       />
       <el-button type="primary" @click="addPro">添加</el-button>
