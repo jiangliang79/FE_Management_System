@@ -45,3 +45,19 @@ export const getClassList = (data) => {
 export const addClass = (data) => {
     return fetch('/api/system/management/class/add', data, "POST")
 }
+//获取老师信息列表
+export const getTeacherList = (data) => {
+    return fetch('/api/system/management/teacher/list',data, "GET")
+}
+// 获取老师管理的班级列表
+export const getTeacherClassList = (data) => {
+    return fetch('/api/system/management/teacher/class/list',data, "GET")
+}
+//12.删除老师管理的班级信息
+export const deleteTeacherClass = (data) => {
+    return fetch('/api/system/management/teacher/class/delete',data, "POST")
+}
+
+export const classDivid = (data) => {
+    return fetch('/api/system/management/class/divide',data,"POST")
+}

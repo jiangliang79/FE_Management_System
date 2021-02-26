@@ -57,11 +57,19 @@
           </el-submenu>
           <el-submenu index="4" class="menu-item">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i class="el-icon-s-check"></i>
               <span>老师信息管理</span>
             </template>
-            <el-menu-item index="4-1">老师管理</el-menu-item>
-            <el-menu-item index="4-2">老师班级管理</el-menu-item>
+            <el-menu-item index="4-1"
+              ><router-link to="/homePage/teacherList" tag="span"
+                >老师管理</router-link
+              ></el-menu-item
+            >
+            <el-menu-item index="4-2"
+              ><router-link to="/homePage/teacherClass" tag="span"
+                >老师班级管理</router-link
+              ></el-menu-item
+            >
           </el-submenu>
         </el-menu>
       </div>

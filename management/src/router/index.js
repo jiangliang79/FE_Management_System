@@ -43,6 +43,16 @@ export default new Router({
                     path: '/homePage/class',
                     name: 'class',
                     component: () => import('@/view/homePage/Class.vue')
+                },
+                {
+                    path: '/homePage/teacherList',
+                    name: 'teacherList',
+                    component: () => import('@/view/homePage/Teacher.vue')
+                },
+                {
+                    path: '/homePage/teacherClass',
+                    name: 'teacherClass',
+                    component: () => import('@/view/homePage/TeacherClass.vue')
                 }
             ]
         }
