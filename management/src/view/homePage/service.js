@@ -85,3 +85,23 @@ export const deleteFile = (data) => {
 export const previewFile = (data) => {
     return fetch('/api/system/management/article/preview',data,"POST")
 }
+//获取老师发布任务记录
+export const getSendTaskList = (data) => {
+    return fetch('/api/system/management/teacher/task/release/list',data,"GET")
+}
+// 删除记录
+export const deleteRecord = (data) => {
+    return fetch('/api/system/management/record/delete', data,"POST")
+}
+//获取学生成绩评定记录
+export const getStudentGradeList = (data) => {
+    return fetch('/api/system/management/student/grade/list', data,"GET")
+}
+//批阅查看文件列表
+export const getFileList = (data) => {
+    return fetch('/api/system/management/student/task/article/list',data,"GET")
+}
+// 文件下载
+export const fileDownLoad = (data) => {
+    return fetch('/api/system/management/article/download',data,"POST")
+}

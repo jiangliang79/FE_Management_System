@@ -79,6 +79,22 @@
               ></span
             >
           </el-menu-item>
+          <el-menu-item index="6" class="menu-item">
+            <i class="el-icon-s-order"></i>
+            <span slot="title"
+              ><router-link to="/homePage/teacherSendTaskRecord" tag="span"
+                >老师发布任务记录</router-link
+              ></span
+            >
+          </el-menu-item>
+          <el-menu-item index="7" class="menu-item">
+            <i class="el-icon-notebook-2"></i>
+            <span slot="title"
+              ><router-link to="/homePage/studentScoreRecord" tag="span"
+                >学生成绩评定记录</router-link
+              ></span
+            >
+          </el-menu-item>
         </el-menu>
       </div>
       <div class="rightContent">

@@ -58,6 +58,16 @@ export default new Router({
                     path: '/homePage/fileTableManagement',
                     name: 'fileTableManagement',
                     component: () => import('@/view/homePage/FileTable.vue')
+                },
+                {
+                    path: '/homePage/teacherSendTaskRecord',
+                    name: 'teacherSendTaskRecord',
+                    component: () => import('@/view/homePage/TeacherSendTaskRecord.vue')
+                },
+                {
+                    path: '/homePage/studentScoreRecord',
+                    name: 'studentScoreRecord',
+                    component: () => import('@/view/homePage/StudentScoreList.vue')
                 }
             ]
         }
