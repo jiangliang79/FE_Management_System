@@ -20,7 +20,7 @@
         :pageNo="pageNo"
         :pageSize="pageSize"
       >
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="240">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="preview(scope.row)"
               >预览</el-button
