@@ -115,7 +115,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("../../assets/bg.jpeg");
+  background: url("../../static/assets/bg.jpeg");
   background-size: 100% 100%;
 }
 .loginPage .loginbox {

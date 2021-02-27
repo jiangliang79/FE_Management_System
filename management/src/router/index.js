@@ -53,6 +53,11 @@ export default new Router({
                     path: '/homePage/teacherClass',
                     name: 'teacherClass',
                     component: () => import('@/view/homePage/TeacherClass.vue')
+                },
+                {
+                    path: '/homePage/fileTableManagement',
+                    name: 'fileTableManagement',
+                    component: () => import('@/view/homePage/FileTable.vue')
                 }
             ]
         }

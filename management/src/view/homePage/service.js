@@ -65,3 +65,23 @@ export const classDivid = (data) => {
 export const getStudentList = (data) => {
     return fetch('/api/system/management/student/list', data, "GET")
 }
+// 文件列表
+export const getArticleList = (data) => {
+    return fetch('/api/system/management/article/list', data, "GET")
+}
+
+export const uploadFile = (data) => {
+    return fetch('/api/system/management/article/upload', data, "POST")
+}
+// 编辑文件
+export const editFile = (data) => {
+    return fetch('/api/system/management/article/edit', data, "POST")
+}
+// 删除文件
+export const deleteFile = (data) => {
+    return fetch('/api/system/management/article/delete',data, "POST")
+}
+//预览文件
+export const previewFile = (data) => {
+    return fetch('/api/system/management/article/preview',data,"POST")
+}

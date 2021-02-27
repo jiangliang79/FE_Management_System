@@ -71,6 +71,14 @@
               ></el-menu-item
             >
           </el-submenu>
+          <el-menu-item index="5" class="menu-item">
+            <i class="el-icon-s-management"></i>
+            <span slot="title"
+              ><router-link to="/homePage/fileTableManagement" tag="span"
+                >文档表管理</router-link
+              ></span
+            >
+          </el-menu-item>
         </el-menu>
       </div>
       <div class="rightContent">
