@@ -100,7 +100,7 @@ export default {
       this.getDataList();
     },
     // 文件预览
-    async preview(data) {
+    preview(data) {
       this.pdfUrl =
         window.origin +
         "/api/system/management/article/preview?articleId=" +

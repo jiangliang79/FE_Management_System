@@ -60,7 +60,14 @@ export default {
   watch: {},
   methods: {
     // 预览
-    preview(data) {},
+    preview(data) {
+      this.pdfUrl =
+        window.origin +
+        "/api/system/management/article/preview?articleId=" +
+        data.articleId;
+      var win = window.open(this.pdfUrl);
+      win.document.title = data.articleName;
+    },
     // 获取列表
     async getdataList() {
       try {

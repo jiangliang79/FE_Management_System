@@ -93,10 +93,38 @@ export default {
       this.getdataList();
     },
     // 文件预览
-    preview(data) {},
+    preview(data) {
+      this.pdfUrl =
+        window.origin +
+        "/api/system/management/article/preview?articleId=" +
+        data.articleId;
+      var win = window.open(this.pdfUrl);
+      win.document.title = data.articleName;
+    },
     // 文件下载
     async downloadFile(data) {
-      const resp = await fileDownLoad({ articleId: data.articleId });
+      const fileName = data.articleName;
+      fetch(
+        "/api/system/management/article/download?articleId=" + data.articleId,
+        {
+          headers: {
+            responseType: "arraybuffer",
+            authentication: window.localStorage.getItem("authentication"),
+          },
+        }
+      )
+        .then((res) => res.blob())
+        .then((data) => {
+          const downloadURL = window.URL.createObjectURL(data);
+          const a = document.createElement("a");
+          a.style.display = "none";
+          a.href = downloadURL;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(downloadURL);
+        });
     },
     async getdataList() {
       try {

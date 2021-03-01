@@ -68,30 +68,38 @@ export default {
   watch: {},
   methods: {
     // 文件预览
-    async preview(data) {
-      const resp = await previewFile({ articleId: data.articleId });
-      if (resp.status === 200) {
-        console.log(resp);
-        // printOrderTag(params)
-        //   .then((data) => {
-        //     const content = data;
-        //     const blob = new Blob([content]);
-        //     var url = window.URL.createObjectURL(blob);
-        //     this.pdfUrl =
-        //       "./static/pdf/web/viewer.html?file=" + encodeURIComponent(url);
-        //     var win = window.open(this.pdfUrl);
-        //     setTimeout(() => {
-        //       win.document.title = "标题";
-        //     }, 500);
-        //   })
-        //   .catch((response) => {
-        //     console.log(response);
-        //   });
-      }
+    preview(data) {
+      this.pdfUrl =
+        window.origin +
+        "/api/system/management/article/preview?articleId=" +
+        data.articleId;
+      var win = window.open(this.pdfUrl);
+      win.document.title = data.articleName;
     },
     // 文件下载
     async downloadFile(data) {
-      const resp = await fileDownLoad({ articleId: data.articleId });
+      const fileName = data.articleName;
+      fetch(
+        "/api/system/management/article/download?articleId=" + data.articleId,
+        {
+          headers: {
+            responseType: "arraybuffer",
+            authentication: window.localStorage.getItem("authentication"),
+          },
+        }
+      )
+        .then((res) => res.blob())
+        .then((data) => {
+          const downloadURL = window.URL.createObjectURL(data);
+          const a = document.createElement("a");
+          a.style.display = "none";
+          a.href = downloadURL;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(downloadURL);
+        });
     },
     getFileTable(type) {
       switch (type) {

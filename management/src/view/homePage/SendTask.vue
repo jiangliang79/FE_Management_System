@@ -25,7 +25,7 @@
             <el-button
               size="mini"
               type="primary"
-              @click="downloadFile(scope.row)"
+              @click="fileDownLoads(scope.row)"
               >下载文件</el-button
             >
             <el-button size="mini" type="danger" @click="uploadFile(scope.row)"
@@ -88,6 +88,14 @@ export default {
       this.pageSize = 10;
       this.getdataList();
     },
+    preview(data) {
+      this.pdfUrl =
+        window.origin +
+        "/api/system/management/article/preview?articleId=" +
+        data.articleId;
+      var win = window.open(this.pdfUrl);
+      win.document.title = data.articleName;
+    },
     // 上传发布
     uploadFile(data) {
       this.$refs.file_modal.action =
@@ -97,9 +105,29 @@ export default {
       };
       this.$refs.file_modal.showModal(); // 打开添加/编辑弹窗
     },
-    // 文件下载
-    async downloadFile(data) {
-      const resp = await fileDownLoad({ articleId: data.articleId });
+    async fileDownLoads(data) {
+      const fileName = data.articleName;
+      fetch(
+        "/api/system/management/article/download?articleId=" + data.articleId,
+        {
+          headers: {
+            responseType: "arraybuffer",
+            authentication: window.localStorage.getItem("authentication"),
+          },
+        }
+      )
+        .then((res) => res.blob())
+        .then((data) => {
+          const downloadURL = window.URL.createObjectURL(data);
+          const a = document.createElement("a");
+          a.style.display = "none";
+          a.href = downloadURL;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(downloadURL);
+        });
     },
     async getdataList() {
       try {

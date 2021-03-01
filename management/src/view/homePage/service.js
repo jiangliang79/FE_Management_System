@@ -103,7 +103,7 @@ export const getFileList = (data) => {
 }
 // 文件下载
 export const fileDownLoad = (data) => {
-    return fetch('/api/system/management/article/download',data,"POST")
+    return fetch('/api/system/management/article/download',data,"GET")
 }
 //批阅实习表
 export const checkTaskTable = (data) => {
