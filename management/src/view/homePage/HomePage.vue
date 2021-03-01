@@ -156,7 +156,7 @@
               <span>成绩评定管理</span>
             </template>
             <el-menu-item index="7-1"
-              ><router-link to="/homePage/sendTask" tag="span"
+              ><router-link to="/homePage/scoreCheck" tag="span"
                 >成绩评定</router-link
               ></el-menu-item
             >

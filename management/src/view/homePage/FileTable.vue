@@ -101,16 +101,12 @@ export default {
     },
     // 文件预览
     async preview(data) {
-      const resp = await previewFile({ articleId: data.articleId });
-      const content = resp;
-      const blob = new Blob([content]);
-      var url = window.URL.createObjectURL(blob);
       this.pdfUrl =
-        "../../static/pdf/web/viewer.html?file=" + encodeURIComponent(url);
+        window.origin +
+        "/api/system/management/article/preview?articleId=" +
+        data.articleId;
       var win = window.open(this.pdfUrl);
-      setTimeout(() => {
-        win.document.title = "标题";
-      }, 500);
+      win.document.title = data.articleName;
     },
     uploadFile() {
       this.$refs.file_modal.action = "/api/system/management/article/upload";

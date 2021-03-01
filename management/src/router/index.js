@@ -103,6 +103,17 @@ export default new Router({
                     path: '/homePage/studentTaskWriteRecord',
                     name: 'studentTaskWriteRecord',
                     component: () => import('@/view/homePage/StudentTaskWriteRecord.vue')
+                },
+                {
+                    path: '/homePage/scoreCheck',
+                    name: '/homePage/scoreCheck',
+                    component: () => import('@/view/homePage/ScoreCheck.vue')
+                },
+                // 成绩评定列表
+                {
+                    path: '/homePage/scoreCheckList',
+                    name: '/homePage/scoreCheckList',
+                    component: () => import('@/view/homePage/ScoreCheckList.vue')
                 }
             ]
         }

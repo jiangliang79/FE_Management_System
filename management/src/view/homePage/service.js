@@ -83,7 +83,7 @@ export const deleteFile = (data) => {
 }
 //预览文件
 export const previewFile = (data) => {
-    return fetch('/api/system/management/article/preview',data,"POST")
+    return fetch('/api/system/management/article/preview',data,"GET")
 }
 //获取老师发布任务记录
 export const getSendTaskList = (data) => {
