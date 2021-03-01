@@ -68,6 +68,41 @@ export default new Router({
                     path: '/homePage/studentScoreRecord',
                     name: 'studentScoreRecord',
                     component: () => import('@/view/homePage/StudentScoreList.vue')
+                },
+                {
+                    path: '/homePage/fileViewDownload',
+                    name: 'fileViewDownload',
+                    component: () => import('@/view/homePage/FileViewDownload.vue')
+                },
+                {
+                    path: '/homePage/checkTaskTable',
+                    name: 'checkTaskTable',
+                    component: () => import('@/view/homePage/CheckTaskTable.vue')
+                },
+                {
+                    path: '/homePage/sendTask',
+                    name: 'sendTask',
+                    component: () => import('@/view/homePage/SendTask.vue')
+                },
+                {
+                    path: '/homePage/personalInfo',
+                    name: 'personalInfo',
+                    component: () => import('@/view/homePage/PersonalInfo.vue')
+                },
+                {
+                    path: '/homePage/studentTask',
+                    name: 'studentTask',
+                    component: () => import('@/view/homePage/StudentTask.vue')
+                },
+                {
+                    path: '/homePage/teacherTaskRecord',
+                    name: 'teacherTaskRecord',
+                    component: () => import('@/view/homePage/TeacherTaskRecord.vue')
+                },
+                {
+                    path: '/homePage/studentTaskWriteRecord',
+                    name: 'studentTaskWriteRecord',
+                    component: () => import('@/view/homePage/StudentTaskWriteRecord.vue')
                 }
             ]
         }

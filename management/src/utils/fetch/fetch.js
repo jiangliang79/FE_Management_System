@@ -1,3 +1,4 @@
+
 const baseUrl = '';
 
 function Async(url = "", data = {}, type = "GET") {

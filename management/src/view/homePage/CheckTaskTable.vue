@@ -22,21 +22,38 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="preview(scope.row)">预览</el-button>
-            <el-button
-              size="mini"
-              type="danger"
-              @click="downloadFile(scope.row)"
-              >下载</el-button
+            <el-button size="mini" type="primary" @click="taskPass(scope.row)"
+              >通过</el-button
+            >
+            <el-button size="mini" type="danger" @click="taskRepulse(scope.row)"
+              >打回</el-button
             >
           </template>
         </el-table-column>
       </Table>
     </div>
+    <el-dialog title="未通过原因" :visible.sync="dialogVisible">
+      <el-form :model="form" :rules="rules">
+        <el-form-item
+          label="未通过原因"
+          :label-width="formLabelWidth"
+          prop="remark"
+        >
+          <el-input
+            v-model="form.remark"
+            autocomplete="off"
+          ></el-input> </el-form-item
+      ></el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancel">取 消</el-button>
+        <el-button type="primary" @click="handleOk">提交</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getFileList, fileDownLoad } from "./service";
+import { getFileList, checkTaskTable } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
 import { delModal } from "@/utils/deleteFun.js";
@@ -52,7 +69,18 @@ export default {
       search: "",
       total: 0,
       dataList: [],
-      isAll: false,
+      dialogVisible: false,
+      checkStatus: 0,
+      selectData: {},
+      form: {
+        remark: "",
+      },
+      formLabelWidth: "85px",
+      rules: {
+        remark: [
+          { required: true, message: "请输入未通过原因", trigger: "blur" },
+        ],
+      },
       columns: [
         {
           prop: "studentName",
@@ -87,6 +115,14 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    cancel() {
+      this.dialogVisible = false;
+      this.form.remark = "";
+    },
+    // 提交原因
+    handleOk() {
+      this.checkTask(this.selectData);
+    },
     searchData() {
       this.pageNo = 1;
       this.pageSize = 10;
@@ -94,23 +130,49 @@ export default {
     },
     // 文件预览
     preview(data) {},
-    // 文件下载
-    async downloadFile(data) {
-      const resp = await fileDownLoad({ articleId: data.articleId });
+    // 通过
+    taskPass(data) {
+      this.checkStatus = 0;
+      this.checkTask(data);
+    },
+    // 打回
+    taskRepulse(data) {
+      this.checkStatus = 1;
+      this.selectData = data;
+      this.dialogVisible = true;
+    },
+    // 通过/打回接口函数
+    async checkTask(data) {
+      let params = {
+        taskId: data.taskId,
+        status: this.checkStatus,
+      };
+      if (this.checkStatus === 1) {
+        //未通过，填写原因
+        params = Object.assign(params, { remark: this.form.remark });
+      }
+      const resp = await checkTaskTable(params);
+      if (resp.status === 200) {
+        if (this.checkStatus === 1) {
+          // 如果填写未通过原因，成功后，需要关闭弹窗
+          this.dialogVisible = false;
+          this.form.remark = "";
+        }
+        this.$message({
+          message: "操作成功",
+          type: "success",
+        });
+        this.getdataList();
+      }
     },
     async getdataList() {
       try {
-        let params = {
+        const params = {
+          teacherId: this.$store.state.userInfo.userId, // 老师登陆时需要传老师id,即，当前登陆用户的userId
           pageNo: this.pageNo,
           pageSize: this.pageSize,
           search: this.search,
         };
-        if (this.$store.state.userInfo.type === 3) {
-          // 学院登陆时需要传学院id，即：当前用户的userId
-          params = Object.assign(params, {
-            collegeId: this.$store.state.userInfo.userId,
-          });
-        }
         const resp = await getFileList(params);
         if (resp.status === 200) {
           this.dataList = resp.data.list;

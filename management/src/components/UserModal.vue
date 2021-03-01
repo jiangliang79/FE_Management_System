@@ -144,7 +144,7 @@ export default {
       };
       params = Object.assign(
         params,
-        this.operatorType === 0 ? { password: this.password } : {}
+        this.operatorType === 0 ? { password: this.form.password } : {}
       );
       const resp = await addUser(params);
       if (resp.status === 200) {

@@ -55,12 +55,16 @@ export default {
       isAll: false,
       columns: [
         {
+          prop: "studentName",
+          label: "学生姓名",
+        },
+        {
           prop: "articleName",
           label: "表名",
         },
         {
           prop: "teacherName",
-          label: "老师",
+          label: "评定老师",
         },
         {
           prop: "className",

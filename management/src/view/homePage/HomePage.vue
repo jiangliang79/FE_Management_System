@@ -18,7 +18,11 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <el-menu-item index="1" class="menu-item">
+          <el-menu-item
+            index="1"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 0"
+          >
             <i class="el-icon-s-custom"></i>
             <span slot="title">
               <router-link to="/homePage/userManagement" tag="span"
@@ -26,7 +30,11 @@
               >
             </span>
           </el-menu-item>
-          <el-menu-item index="2" class="menu-item">
+          <el-menu-item
+            index="2"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type !== 1"
+          >
             <i class="el-icon-user-solid"></i>
             <span slot="title"
               ><router-link to="/homePage/studentInfo" tag="span"
@@ -34,7 +42,11 @@
               ></span
             >
           </el-menu-item>
-          <el-submenu index="3" class="menu-item">
+          <el-submenu
+            index="3"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 0"
+          >
             <template slot="title">
               <i class="el-icon-s-home"></i>
               <span>学校组织管理</span>
@@ -55,7 +67,11 @@
               >
             </el-menu-item>
           </el-submenu>
-          <el-submenu index="4" class="menu-item">
+          <el-submenu
+            index="4"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 0"
+          >
             <template slot="title">
               <i class="el-icon-s-check"></i>
               <span>老师信息管理</span>
@@ -71,7 +87,11 @@
               ></el-menu-item
             >
           </el-submenu>
-          <el-menu-item index="5" class="menu-item">
+          <el-menu-item
+            index="5"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 0"
+          >
             <i class="el-icon-s-management"></i>
             <span slot="title"
               ><router-link to="/homePage/fileTableManagement" tag="span"
@@ -79,7 +99,46 @@
               ></span
             >
           </el-menu-item>
-          <el-menu-item index="6" class="menu-item">
+          <el-menu-item
+            index="8"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 2"
+          >
+            <i class="el-icon-edit-outline"></i>
+            <span slot="title"
+              ><router-link to="/homePage/checkTaskTable" tag="span"
+                >批阅实习表</router-link
+              ></span
+            >
+          </el-menu-item>
+          <el-submenu
+            index="6"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 2"
+          >
+            <template slot="title">
+              <i class="el-icon-s-order"></i>
+              <span>发布任务管理</span>
+            </template>
+            <el-menu-item index="6-1"
+              ><router-link to="/homePage/sendTask" tag="span"
+                >发布任务</router-link
+              ></el-menu-item
+            >
+            <el-menu-item index="6-2"
+              ><router-link to="/homePage/teacherSendTaskRecord" tag="span"
+                >老师发布任务记录</router-link
+              ></el-menu-item
+            >
+          </el-submenu>
+          <el-menu-item
+            index="6"
+            class="menu-item"
+            v-else-if="
+              +this.$store.state.userInfo.type === 0 ||
+              +this.$store.state.userInfo.type === 3
+            "
+          >
             <i class="el-icon-s-order"></i>
             <span slot="title"
               ><router-link to="/homePage/teacherSendTaskRecord" tag="span"
@@ -87,7 +146,31 @@
               ></span
             >
           </el-menu-item>
-          <el-menu-item index="7" class="menu-item">
+          <el-submenu
+            index="7"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 2"
+          >
+            <template slot="title">
+              <i class="el-icon-s-platform"></i>
+              <span>成绩评定管理</span>
+            </template>
+            <el-menu-item index="7-1"
+              ><router-link to="/homePage/sendTask" tag="span"
+                >成绩评定</router-link
+              ></el-menu-item
+            >
+            <el-menu-item index="7-2"
+              ><router-link to="/homePage/studentScoreRecord" tag="span"
+                >学生成绩评定记录</router-link
+              ></el-menu-item
+            >
+          </el-submenu>
+          <el-menu-item
+            index="7"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 0"
+          >
             <i class="el-icon-notebook-2"></i>
             <span slot="title"
               ><router-link to="/homePage/studentScoreRecord" tag="span"
@@ -95,6 +178,55 @@
               ></span
             >
           </el-menu-item>
+          <el-menu-item
+            index="9"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type !== 1"
+          >
+            <i class="el-icon-data-board"></i>
+            <span slot="title"
+              ><router-link to="/homePage/fileViewDownload" tag="span"
+                >批阅查看及下载</router-link
+              ></span
+            >
+          </el-menu-item>
+          <el-menu-item
+            index="10"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 1"
+          >
+            <i class="el-icon-user-solid"></i>
+            <span slot="title"
+              ><router-link to="/homePage/personalInfo" tag="span"
+                >个人信息</router-link
+              ></span
+            >
+          </el-menu-item>
+          <el-submenu
+            index="11"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 1"
+          >
+            <template slot="title">
+              <i class="el-icon-s-platform"></i>
+              <span>实习管理</span>
+            </template>
+            <el-menu-item index="11-1"
+              ><router-link to="/homePage/studentTask" tag="span"
+                >实习表填写</router-link
+              ></el-menu-item
+            >
+            <el-menu-item index="11-2"
+              ><router-link to="/homePage/teacherTaskRecord" tag="span"
+                >查看老师发布任务</router-link
+              ></el-menu-item
+            >
+            <el-menu-item index="11-3"
+              ><router-link to="/homePage/studentTaskWriteRecord" tag="span"
+                >学生实习表填写记录</router-link
+              ></el-menu-item
+            >
+          </el-submenu>
         </el-menu>
       </div>
       <div class="rightContent">

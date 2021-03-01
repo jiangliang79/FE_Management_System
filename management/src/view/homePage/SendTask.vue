@@ -24,25 +24,31 @@
             <el-button size="mini" @click="preview(scope.row)">预览</el-button>
             <el-button
               size="mini"
-              type="danger"
+              type="primary"
               @click="downloadFile(scope.row)"
-              >下载</el-button
+              >下载文件</el-button
+            >
+            <el-button size="mini" type="danger" @click="uploadFile(scope.row)"
+              >上传发布</el-button
             >
           </template>
         </el-table-column>
       </Table>
     </div>
+    <UploadFileModal ref="file_modal" />
   </div>
 </template>
 
 <script>
-import { getFileList, fileDownLoad } from "./service";
+import { getTaskList, fileDownLoad } from "./service";
 import Table from "@/components/Table.vue";
+import UploadFileModal from "@/components/UploadFileModal.vue";
 import moment from "moment";
 import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,
+    UploadFileModal,
   },
   data() {
     return {
@@ -52,31 +58,21 @@ export default {
       search: "",
       total: 0,
       dataList: [],
-      isAll: false,
       columns: [
-        {
-          prop: "studentName",
-          label: "学生",
-        },
         {
           prop: "articleName",
           label: "文件名",
         },
         {
-          prop: "className",
-          label: "班级",
+          prop: "startTime",
+          label: "开始时间",
+          formatter: (row, column, cellValue, index) => {
+            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+          },
         },
         {
-          prop: "professionName",
-          label: "专业",
-        },
-        {
-          prop: "collegeName",
-          label: "学院名称",
-        },
-        {
-          prop: "updateTime",
-          label: "更新日期",
+          prop: "endTime",
+          label: "结束时间",
           formatter: (row, column, cellValue, index) => {
             return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
           },
@@ -92,8 +88,15 @@ export default {
       this.pageSize = 10;
       this.getdataList();
     },
-    // 文件预览
-    preview(data) {},
+    // 上传发布
+    uploadFile(data) {
+      this.$refs.file_modal.action =
+        "/api/system/management/teacher/task/article/release";
+      this.$refs.file_modal.datas = {
+        teacherId: this.$store.state.userInfo.userId,
+      };
+      this.$refs.file_modal.showModal(); // 打开添加/编辑弹窗
+    },
     // 文件下载
     async downloadFile(data) {
       const resp = await fileDownLoad({ articleId: data.articleId });
@@ -104,14 +107,9 @@ export default {
           pageNo: this.pageNo,
           pageSize: this.pageSize,
           search: this.search,
+          type: 1, // 任务列表
         };
-        if (this.$store.state.userInfo.type === 3) {
-          // 学院登陆时需要传学院id，即：当前用户的userId
-          params = Object.assign(params, {
-            collegeId: this.$store.state.userInfo.userId,
-          });
-        }
-        const resp = await getFileList(params);
+        const resp = await getTaskList(params);
         if (resp.status === 200) {
           this.dataList = resp.data.list;
           this.total = resp.data.total;

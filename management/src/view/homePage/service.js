@@ -105,3 +105,35 @@ export const getFileList = (data) => {
 export const fileDownLoad = (data) => {
     return fetch('/api/system/management/article/download',data,"POST")
 }
+//批阅实习表
+export const checkTaskTable = (data) => {
+    return fetch('/api/system/management/teacher/task/article/check', data,"POST")
+}
+// 发布任务中的任务列表
+export const getTaskList = (data) => {
+    return fetch('/api/system/management/teacher/task/article/list', data,"GET")
+}
+// 获取学生个人信息
+export const getStudentInfo = (data) => {
+    return fetch('/api/system/management/student/info',data,"GET")
+}
+// 编辑学生个人信息
+export const editStudentInfo = (data) => {
+    return fetch('/api/system/management/student/info', data, "POST")
+}
+// 获取学生实习表填写
+export const getStudentTaskList = (data) => {
+    return fetch('/api/system/management/student/article/task/list',data,"GET")
+}
+//上传文件
+export const uploadTaskFile = (data) => {
+    return fetch('/api/system/management/student/teacher/task/upload',data,"POST")
+}
+// 学生查看老师发布任务
+export const teacherTaskRecord = (data) => {
+    return fetch('/api/system/management/student/teacher/task/record',data,"GET")
+}
+// 获取学生实习表填写记录
+export const getStudentTaskrecord = (data) => {
+    return fetch('/api/system/management/student/teacher/task/write/record',data,"GET")
+}

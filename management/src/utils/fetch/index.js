@@ -1,5 +1,5 @@
 import Async from "./fetch";
-
+import { Message } from 'element-ui';
 export default async (url = "", data = {}, type = "GET", notify = false) => {
     const $http = new Async(url, data, type);
     $http.httpProvider = function () {
@@ -8,14 +8,14 @@ export default async (url = "", data = {}, type = "GET", notify = false) => {
                 if (response.status == 200) {
                     if (notify && responseJson) {
                         if (responseJson.status === "success") {
-                            this.$message({
+                            Message({
                                 message: responseJson.message || "操作成功",
                                 type: "success",
                                 showClose: true,
                                 duration: 2000
                             });
                         } else {
-                            this.$message({
+                            Message({
                                 message: responseJson.message || "操作失败",
                                 type: "error",
                                 showClose: true,
@@ -27,7 +27,7 @@ export default async (url = "", data = {}, type = "GET", notify = false) => {
                     return responseJson;
                 }
                 if (response.status == 401) {
-                    this.$message({
+                    Message({
                         type: 'error',
                         message: "登录超时,3秒后退出登录"
                     })
@@ -37,7 +37,7 @@ export default async (url = "", data = {}, type = "GET", notify = false) => {
                     // throw new Error();
                     return responseJson;
                 }
-                this.$message({
+                Message({
                     message: `操作失败,请联系管理员,错误代码${response.status}`,
                     type: "error",
                     showClose: true,
