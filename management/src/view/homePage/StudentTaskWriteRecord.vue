@@ -28,7 +28,7 @@
 <script>
 import Table from "@/components/Table.vue";
 import moment from "moment";
-import { getStudentTaskList, previewFile } from "./service";
+import { getStudentTaskrecord, previewFile } from "./service";
 import { downloadFile } from "@/utils/commonFun.js";
 export default {
   components: {
@@ -98,7 +98,7 @@ export default {
         const params = {
           studentId: this.$store.state.userInfo.userId,
         };
-        const resp = await getStudentTaskList(params);
+        const resp = await getStudentTaskrecord(params);
         if (resp.status === 200) {
           this.dataList = resp.data.list;
           this.total = resp.data.total;
