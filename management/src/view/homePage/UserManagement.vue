@@ -52,7 +52,7 @@ import Table from "@/components/Table.vue";
 import moment from "moment";
 import UserModal from "@/components/UserModal.vue";
 import ResetPasswordModal from "@/components/ResetPasswordModal.vue";
-import { delModal } from "@/utils/deleteFun.js";
+import { delModal } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -187,13 +187,6 @@ export default {
   mounted() {
     this.getUserList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

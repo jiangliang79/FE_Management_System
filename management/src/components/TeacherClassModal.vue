@@ -211,13 +211,6 @@ export default {
   mounted() {
     this.getCollegeLists();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

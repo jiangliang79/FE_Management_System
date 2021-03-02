@@ -154,13 +154,6 @@ export default {
   mounted() {
     this.getdataList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

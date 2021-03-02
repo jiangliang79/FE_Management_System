@@ -34,7 +34,7 @@ import Table from "@/components/Table.vue";
 import UploadFileModal from "@/components/UploadFileModal.vue";
 import moment from "moment";
 import { getStudentTaskList, deleteFile, previewFile } from "./service";
-import { delModal } from "@/utils/deleteFun.js";
+import { delModal, downLoadFile } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -89,28 +89,7 @@ export default {
     },
     // 文件下载
     async downloadFile(data) {
-      const fileName = data.articleName;
-      fetch(
-        "/api/system/management/article/download?articleId=" + data.articleId,
-        {
-          headers: {
-            responseType: "arraybuffer",
-            authentication: window.localStorage.getItem("authentication"),
-          },
-        }
-      )
-        .then((res) => res.blob())
-        .then((data) => {
-          const downloadURL = window.URL.createObjectURL(data);
-          const a = document.createElement("a");
-          a.style.display = "none";
-          a.href = downloadURL;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(downloadURL);
-        });
+      downLoadFile(data);
     },
     uploadFile(data) {
       this.$refs.file_modal.action =
@@ -186,13 +165,6 @@ export default {
   mounted() {
     this.getDataList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

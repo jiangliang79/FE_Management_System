@@ -277,13 +277,6 @@ export default {
   mounted() {
     this.getUserInfo();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style scoped>

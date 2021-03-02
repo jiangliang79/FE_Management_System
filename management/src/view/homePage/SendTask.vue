@@ -44,7 +44,7 @@ import { getTaskList, fileDownLoad } from "./service";
 import Table from "@/components/Table.vue";
 import UploadFileModal from "@/components/UploadFileModal.vue";
 import moment from "moment";
-import { delModal } from "@/utils/deleteFun.js";
+import { downLoadFile } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -86,7 +86,7 @@ export default {
     searchData() {
       this.pageNo = 1;
       this.pageSize = 10;
-      this.getdataList();
+      this.getDataList();
     },
     preview(data) {
       this.pdfUrl =
@@ -102,34 +102,15 @@ export default {
         "/api/system/management/teacher/task/article/release";
       this.$refs.file_modal.datas = {
         teacherId: this.$store.state.userInfo.userId,
+        type: this.$refs.file_modal.type,
       };
       this.$refs.file_modal.showModal(); // 打开添加/编辑弹窗
     },
+    // 文件下载
     async fileDownLoads(data) {
-      const fileName = data.articleName;
-      fetch(
-        "/api/system/management/article/download?articleId=" + data.articleId,
-        {
-          headers: {
-            responseType: "arraybuffer",
-            authentication: window.localStorage.getItem("authentication"),
-          },
-        }
-      )
-        .then((res) => res.blob())
-        .then((data) => {
-          const downloadURL = window.URL.createObjectURL(data);
-          const a = document.createElement("a");
-          a.style.display = "none";
-          a.href = downloadURL;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(downloadURL);
-        });
+      downLoadFile(data);
     },
-    async getdataList() {
+    async getDataList() {
       try {
         let params = {
           pageNo: this.pageNo,
@@ -150,17 +131,17 @@ export default {
     // 改变页码
     handleSizeChange(pageSize) {
       this.pageSize = pageSize;
-      this.getdataList();
+      this.getDataList();
     },
     // 改变页码
     handleCurrentChange(pageNo) {
       this.pageNo = pageNo;
-      this.getdataList();
+      this.getDataList();
     },
   },
   created() {},
   mounted() {
-    this.getdataList();
+    this.getDataList();
   },
 };
 </script>

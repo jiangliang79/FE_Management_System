@@ -47,7 +47,7 @@ import UploadFileModal from "@/components/UploadFileModal.vue";
 import EditFileModal from "@/components/EditFileModal.vue";
 import moment from "moment";
 import { getArticleList, deleteFile, previewFile } from "./service";
-import { delModal } from "@/utils/deleteFun.js";
+import { delModal } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,

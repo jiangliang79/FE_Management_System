@@ -56,7 +56,6 @@
 import { getFileList, checkTaskTable } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
-import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,

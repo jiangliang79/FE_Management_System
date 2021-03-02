@@ -48,7 +48,6 @@ import Table from "@/components/Table.vue";
 import StudentInfoDetailModal from "@/components/StudentInfoDetailModal.vue";
 import moment from "moment";
 import { getStudentList } from "./service";
-import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,
@@ -96,11 +95,22 @@ export default {
     },
     async getDataList() {
       try {
-        const params = {
+        let params = {
           pageNo: this.pageNo,
           pageSize: this.pageSize,
           search: this.search,
         };
+        if (this.$store.state.userInfo.type === 3) {
+          // 学院部分
+          params = Object.assign(params, {
+            collegeId: this.$store.state.userInfo.userId,
+          });
+        } else if (this.$store.state.userInfo.type === 2) {
+          // 老师部分
+          params = Object.assign(params, {
+            teacherId: this.$store.state.userInfo.userId,
+          });
+        }
         const resp = await getStudentList(params);
         if (resp.status === 200) {
           this.dataList = resp.data.list;
@@ -126,13 +136,6 @@ export default {
   mounted() {
     this.getDataList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

@@ -38,7 +38,7 @@
 import { getCollegeList, deleteOrganization } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
-import { delModal } from "@/utils/deleteFun.js";
+import { delModal } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,

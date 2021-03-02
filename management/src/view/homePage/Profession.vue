@@ -42,7 +42,7 @@ import Table from "@/components/Table.vue";
 import ProfessionModal from "@/components/ProfessionModal.vue";
 import moment from "moment";
 import { getProfessionList, deleteOrganization } from "./service";
-import { delModal } from "@/utils/deleteFun.js";
+import { delModal } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,

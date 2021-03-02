@@ -25,7 +25,7 @@
             <el-button
               size="mini"
               type="danger"
-              @click="downloadFile(scope.row)"
+              @click="downloadFiles(scope.row)"
               >下载</el-button
             >
           </template>
@@ -39,7 +39,7 @@
 import { getFileList, fileDownLoad } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
-import { delModal } from "@/utils/deleteFun.js";
+import { downLoadFile } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -102,29 +102,8 @@ export default {
       win.document.title = data.articleName;
     },
     // 文件下载
-    async downloadFile(data) {
-      const fileName = data.articleName;
-      fetch(
-        "/api/system/management/article/download?articleId=" + data.articleId,
-        {
-          headers: {
-            responseType: "arraybuffer",
-            authentication: window.localStorage.getItem("authentication"),
-          },
-        }
-      )
-        .then((res) => res.blob())
-        .then((data) => {
-          const downloadURL = window.URL.createObjectURL(data);
-          const a = document.createElement("a");
-          a.style.display = "none";
-          a.href = downloadURL;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(downloadURL);
-        });
+    async downloadFiles(data) {
+      downLoadFile(data);
     },
     async getdataList() {
       try {

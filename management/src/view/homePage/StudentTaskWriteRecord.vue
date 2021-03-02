@@ -14,7 +14,7 @@
             <el-button size="mini" type="primary" @click="preview(scope.row)"
               >预览</el-button
             >
-            <el-button size="mini" type="primary" @click="downloadFile(scope.row)"
+            <el-button size="mini" type="primary" @click="downloadFiles(scope.row)"
               >下载</el-button
             >
           </template>
@@ -29,7 +29,7 @@
 import Table from "@/components/Table.vue";
 import moment from "moment";
 import { getStudentTaskrecord, previewFile } from "./service";
-import { delModal } from "@/utils/deleteFun.js";
+import { downloadFile } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -50,9 +50,10 @@ export default {
         {
           prop: "status",
           label: "状态",
-          // formatter: (row, column, cellValue, index) => {
-          //   return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
-          // },
+          formatter: (row, column, cellValue, index) => {
+            return cellValue === 0 ? "通过" : "未通过";
+            // return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+          },
         },
         {
           prop: "releaseTime",
@@ -77,29 +78,8 @@ export default {
       win.document.title = data.articleName;
     },
     // 文件下载
-    async downloadFile(data) {
-      const fileName = data.articleName;
-      fetch(
-        "/api/system/management/article/download?articleId=" + data.articleId,
-        {
-          headers: {
-            responseType: "arraybuffer",
-            authentication: window.localStorage.getItem("authentication"),
-          },
-        }
-      )
-        .then((res) => res.blob())
-        .then((data) => {
-          const downloadURL = window.URL.createObjectURL(data);
-          const a = document.createElement("a");
-          a.style.display = "none";
-          a.href = downloadURL;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(downloadURL);
-        });
+    async downloadFiles(data) {
+      downloadFile(data);
     },
     getFileTable(type) {
       switch (type) {
@@ -143,13 +123,6 @@ export default {
   mounted() {
     this.getDataList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

@@ -23,7 +23,7 @@
 import { teacherTaskRecord, deleteRecord } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
-import { delModal } from "@/utils/deleteFun.js";
+import { delModal } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -101,13 +101,6 @@ export default {
   mounted() {
     this.getdataList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

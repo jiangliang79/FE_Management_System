@@ -36,7 +36,7 @@
 import Table from "@/components/Table.vue";
 import moment from "moment";
 import { getStudentList } from "./service";
-import { delModal } from "@/utils/deleteFun.js";
+// import { delModal } from "@/utils/deleteFun.js";
 export default {
   components: {
     Table,
@@ -89,6 +89,7 @@ export default {
           pageNo: this.pageNo,
           pageSize: this.pageSize,
           search: this.search,
+          teacherId: this.$store.state.userInfo.userId,
         };
         const resp = await getStudentList(params);
         if (resp.status === 200) {

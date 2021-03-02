@@ -36,7 +36,7 @@
 import Table from "@/components/Table.vue";
 import moment from "moment";
 import { getTeacherClassList, deleteTeacherClass } from "./service";
-import { delModal } from "@/utils/deleteFun.js";
+import { delModal } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -137,13 +137,6 @@ export default {
   mounted() {
     this.getDataList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>
