@@ -115,6 +115,11 @@ export default new Router({
                     path: '/homePage/scoreCheckList',
                     name: '/homePage/scoreCheckList',
                     component: () => import('@/view/homePage/ScoreCheckList.vue')
+                },
+                {
+                    path: '/homePage/echarts',
+                    name: 'echarts',
+                    component: () => import('@/view/homePage/Echarts.vue')
                 }
             ]
         }

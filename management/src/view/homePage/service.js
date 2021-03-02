@@ -137,3 +137,15 @@ export const teacherTaskRecord = (data) => {
 export const getStudentTaskrecord = (data) => {
     return fetch('/api/system/management/student/teacher/task/write/record',data,"GET")
 }
+// 学生出勤率
+export const getStudentAttendance = (data) => {
+    return fetch('/api/system/management/get/student/attendance', data, "GET")
+}
+// 2.获取学生成绩情况
+export const getStudentScore = (data) => {
+    return fetch('api/system/management/get/student/grade',data, "GET")
+}
+// 学生出勤率和成绩的关系
+export const getRelation = (data) => {
+    return fetch('/api/system/management/get/student/attendance/grade/relation', data,"GET")
+}
