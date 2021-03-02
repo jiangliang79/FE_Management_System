@@ -24,7 +24,7 @@
           <el-radio :label="1">女</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="所在院系:" prop="collegeName">
+      <el-form-item label="所在院系:" prop="collegeId">
         <div class="item" v-if="type === 'view'">{{ form.collegeName }}</div>
         <el-select
           v-else
@@ -41,7 +41,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="所在专业:" prop="professionName">
+      <el-form-item label="所在专业:" prop="professionId">
         <div class="item" v-if="type === 'view'">{{ form.professionName }}</div>
         <el-select
           v-else
@@ -60,7 +60,7 @@
       <el-form-item label="所在班级:" prop="className" v-if="type === 'view'">
         <div class="item">{{ form.className }}</div>
       </el-form-item>
-      <el-form-item label="所在班级:" prop="className" v-else>
+      <el-form-item label="所在班级:" prop="classId" v-else>
         <el-select
           v-model="form.classId"
           placeholder="请选择所在班级"
@@ -139,9 +139,9 @@ export default {
           { required: true, message: "请输入学号", trigger: "blur" },
         ],
         sex: [{ required: true }],
-        collegeName: [{ required: true }],
-        professionName: [{ required: true }],
-        className: [{ required: true }],
+        collegeId: [{ required: true }],
+        professionId: [{ required: true }],
+        classId: [{ required: true }],
         nativePlace: [
           { required: true, message: "请输入籍贯", trigger: "blur" },
         ],
