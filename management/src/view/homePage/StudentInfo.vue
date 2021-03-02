@@ -48,6 +48,7 @@ import Table from "@/components/Table.vue";
 import StudentInfoDetailModal from "@/components/StudentInfoDetailModal.vue";
 import moment from "moment";
 import { getStudentList } from "./service";
+import { getUserInfo } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -100,7 +101,6 @@ export default {
           pageSize: this.pageSize,
           search: this.search,
         };
-        console.log(+this.$store.state.userInfo.type);
         if (+this.$store.state.userInfo.type === 3) {
           // 学院部分
           params = Object.assign(params, {
@@ -132,8 +132,14 @@ export default {
       this.pageNo = pageNo;
       this.getDataList();
     },
+    getUserInfos() {
+      const userInfo = getUserInfo();
+      this.$store.dispatch("getUserInfo", userInfo);
+    },
   },
-  created() {},
+  created() {
+    this.getUserInfos();
+  },
   mounted() {
     this.getDataList();
   },

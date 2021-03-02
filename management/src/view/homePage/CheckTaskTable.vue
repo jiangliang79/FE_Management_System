@@ -56,6 +56,7 @@
 import { getFileList, checkTaskTable } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
+import { getUserInfo } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -199,8 +200,14 @@ export default {
       this.pageNo = pageNo;
       this.getdataList();
     },
+    getUserInfos() {
+      const userInfo = getUserInfo();
+      this.$store.dispatch("getUserInfo", userInfo);
+    },
   },
-  created() {},
+  created() {
+    this.getUserInfos();
+  },
   mounted() {
     this.getdataList();
   },

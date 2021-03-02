@@ -36,7 +36,7 @@
 import Table from "@/components/Table.vue";
 import moment from "moment";
 import { getStudentList } from "./service";
-// import { delModal } from "@/utils/deleteFun.js";
+import { delModal, getUserInfo } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -111,8 +111,14 @@ export default {
       this.pageNo = pageNo;
       this.getDataList();
     },
+    getUserInfos() {
+      const userInfo = getUserInfo();
+      this.$store.dispatch("getUserInfo", userInfo);
+    },
   },
-  created() {},
+  created() {
+    this.getUserInfos();
+  },
   mounted() {
     this.getDataList();
   },

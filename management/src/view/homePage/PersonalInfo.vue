@@ -109,6 +109,7 @@ import {
   getClassList,
   editStudentInfo,
 } from "./service";
+import { getUserInfo } from "@/utils/commonFun.js";
 export default {
   components: {},
   data() {
@@ -232,8 +233,14 @@ export default {
         }
       } catch (e) {}
     },
+    getUserInfos() {
+      const userInfo = getUserInfo();
+      this.$store.dispatch("getUserInfo", userInfo);
+    },
   },
-  created() {},
+  created() {
+    this.getUserInfos();
+  },
   mounted() {
     this.getPersonalInfo();
   },

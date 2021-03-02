@@ -34,7 +34,7 @@ import Table from "@/components/Table.vue";
 import UploadFileModal from "@/components/UploadFileModal.vue";
 import moment from "moment";
 import { getStudentTaskList, deleteFile, previewFile } from "./service";
-import { delModal, downLoadFile } from "@/utils/commonFun.js";
+import { delModal, downLoadFile, getUserInfo } from "@/utils/commonFun.js";
 export default {
   components: {
     Table,
@@ -158,8 +158,14 @@ export default {
       this.pageNo = pageNo;
       this.getDataList();
     },
+    getUserInfos() {
+      const userInfo = getUserInfo();
+      this.$store.dispatch("getUserInfo", userInfo);
+    },
   },
-  created() {},
+  created() {
+    this.getUserInfos();
+  },
   mounted() {
     this.getDataList();
   },
