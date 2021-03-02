@@ -72,7 +72,7 @@ export default {
     async getdataList() {
       try {
         const params = {
-          stduentId: this.$store.state.userInfo.userId,
+          studentId: this.$store.state.userInfo.userId,
         };
         const resp = await teacherTaskRecord(params);
         if (resp.status === 200) {

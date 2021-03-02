@@ -136,9 +136,7 @@ export default {
     async getDataList() {
       try {
         const params = {
-          pageNo: this.pageNo,
-          pageSize: this.pageSize,
-          search: this.search,
+          studentId: this.$store.state.userInfo.userId,
         };
         const resp = await getStudentTaskList(params);
         if (resp.status === 200) {
