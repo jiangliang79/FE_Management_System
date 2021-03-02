@@ -100,12 +100,13 @@ export default {
           pageSize: this.pageSize,
           search: this.search,
         };
-        if (this.$store.state.userInfo.type === 3) {
+        console.log(+this.$store.state.userInfo.type);
+        if (+this.$store.state.userInfo.type === 3) {
           // 学院部分
           params = Object.assign(params, {
             collegeId: this.$store.state.userInfo.userId,
           });
-        } else if (this.$store.state.userInfo.type === 2) {
+        } else if (+this.$store.state.userInfo.type === 2) {
           // 老师部分
           params = Object.assign(params, {
             teacherId: this.$store.state.userInfo.userId,

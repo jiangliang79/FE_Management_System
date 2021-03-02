@@ -64,6 +64,7 @@ export default new Router({
                     name: 'teacherSendTaskRecord',
                     component: () => import('@/view/homePage/TeacherSendTaskRecord.vue')
                 },
+                //  学生成绩评定记录
                 {
                     path: '/homePage/studentScoreRecord',
                     name: 'studentScoreRecord',

@@ -128,7 +128,14 @@ export default {
       this.getdataList();
     },
     // 文件预览
-    preview(data) {},
+    preview(data) {
+      this.pdfUrl =
+        window.origin +
+        "/api/system/management/article/preview?articleId=" +
+        data.articleId;
+      var win = window.open(this.pdfUrl);
+      win.document.title = data.articleName;
+    },
     // 通过
     taskPass(data) {
       this.checkStatus = 0;

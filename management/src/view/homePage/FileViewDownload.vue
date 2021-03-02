@@ -112,10 +112,15 @@ export default {
           pageSize: this.pageSize,
           search: this.search,
         };
-        if (this.$store.state.userInfo.type === 3) {
+        if (+this.$store.state.userInfo.type === 3) {
           // 学院登陆时需要传学院id，即：当前用户的userId
           params = Object.assign(params, {
             collegeId: this.$store.state.userInfo.userId,
+          });
+        } else if (+this.$store.state.userInfo.type === 2) {
+          // 老师登陆时需要传老师id，即：当前用户的userId
+          params = Object.assign(params, {
+            teacherId: this.$store.state.userInfo.userId,
           });
         }
         const resp = await getFileList(params);

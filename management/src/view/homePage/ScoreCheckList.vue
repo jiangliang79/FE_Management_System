@@ -103,7 +103,7 @@ export default {
         "/api/system/management/teacher/student/grade/upload";
       this.$refs.file_modal.datas = {
         teacherId: this.$store.state.userInfo.userId,
-        stduentId: +this.$route.query.studentId,
+        studentId: +this.$route.query.studentId,
       };
       this.$refs.file_modal.showModal(); // 打开添加/编辑弹窗
     },
