@@ -227,6 +227,18 @@
               ></el-menu-item
             >
           </el-submenu>
+          <el-menu-item
+            index="12"
+            class="menu-item"
+            v-if="+this.$store.state.userInfo.type === 0"
+          >
+            <i class="el-icon-s-platform"></i>
+            <span slot="title"
+              ><router-link to="/homePage/echarts" tag="span"
+                >数据管理</router-link
+              ></span
+            >
+          </el-menu-item>
         </el-menu>
       </div>
       <div class="rightContent">

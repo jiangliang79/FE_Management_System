@@ -39,3 +39,15 @@ export function downLoadFile(data) {
           window.URL.revokeObjectURL(downloadURL);
         });
 }
+
+export function getUserInfo() {
+  const users = window.localStorage.getItem("userinfo").split("&");
+  let userInfo = {};
+  users.forEach((item) => {
+    const rs = item.split("=");
+    const obj = {};
+    obj[rs[0]] = rs[1];
+    userInfo = Object.assign(userInfo, obj);
+  });
+  return userInfo;
+}

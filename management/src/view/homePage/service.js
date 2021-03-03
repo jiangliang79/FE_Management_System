@@ -109,6 +109,10 @@ export const fileDownLoad = (data) => {
 export const checkTaskTable = (data) => {
     return fetch('/api/system/management/teacher/task/article/check', data,"POST")
 }
+//获取批阅实习表中的任务列表
+export const checkList = (data) => {
+    return fetch('/api/system/management/teacher/task/article/check/list', data, "GET")
+}
 // 发布任务中的任务列表
 export const getTaskList = (data) => {
     return fetch('/api/system/management/teacher/task/article/list', data,"GET")
@@ -136,4 +140,16 @@ export const teacherTaskRecord = (data) => {
 // 获取学生实习表填写记录
 export const getStudentTaskrecord = (data) => {
     return fetch('/api/system/management/student/teacher/task/write/record',data,"GET")
+}
+// 学生出勤率
+export const getStudentAttendance = (data) => {
+    return fetch('/api/system/management/get/student/attendance', data, "GET")
+}
+// 2.获取学生成绩情况
+export const getStudentScore = (data) => {
+    return fetch('api/system/management/get/student/grade',data, "GET")
+}
+// 学生出勤率和成绩的关系
+export const getRelation = (data) => {
+    return fetch('/api/system/management/get/student/attendance/grade/relation', data,"GET")
 }
