@@ -6,7 +6,7 @@
         :style="{
           width: '400px',
           height: '400px',
-          margin: '10px 50px 0px 50px',
+          margin: '20px 50px 0px 50px',
         }"
       ></div>
       <div
@@ -14,7 +14,7 @@
         :style="{
           width: '400px',
           height: '400px',
-          margin: '10px 50px 0px 50px',
+          margin: '20px 50px 0px 50px',
         }"
       ></div>
       <div class="upload">
@@ -135,6 +135,7 @@ export default {
           text: "学生成绩占比",
           // subtext: "纯属虚构",
           left: "center",
+          top: "-5px",
         },
         tooltip: {
           trigger: "item",
@@ -161,7 +162,7 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: "25",
+                fontSize: "14",
                 fontWeight: "bold",
               },
             },

@@ -99,6 +99,11 @@ export default {
             type: "error",
           });
         }
+      } else if (resp.status === 400) {
+        this.$message({
+          message: resp.message,
+          type: "error",
+        });
       }
     },
   },
