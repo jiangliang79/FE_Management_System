@@ -81,7 +81,7 @@ export default {
         this.getRelationEcharts(this.data);
       }
     },
-    drawLine() {
+    drawLine(data) {
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(
         document.getElementById("studenAttendance_echart")
@@ -105,14 +105,14 @@ export default {
             name: "访问来源",
             type: "pie",
             radius: "50%",
-            data: [
-              { value: 1048, name: "搜索引擎" },
-              { value: 735, name: "直接访问" },
-              { value: 580, name: "邮件营销" },
-              { value: 484, name: "联盟广告" },
-              { value: 300, name: "视频广告" },
-            ],
-            // data: data,
+            // data: [
+            //   { value: 1048, name: "搜索引擎" },
+            //   { value: 735, name: "直接访问" },
+            //   { value: 580, name: "邮件营销" },
+            //   { value: 484, name: "联盟广告" },
+            //   { value: 300, name: "视频广告" },
+            // ],
+            data: data,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -124,7 +124,7 @@ export default {
         ],
       });
     },
-    getStudentScoreEcharts() {
+    getStudentScoreEcharts(data) {
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(
         document.getElementById("stduentScore_echart")
@@ -168,18 +168,19 @@ export default {
             labelLine: {
               show: false,
             },
-            data: [
-              { value: 1048, name: "搜索引擎" },
-              { value: 735, name: "直接访问" },
-              { value: 580, name: "邮件营销" },
-              { value: 484, name: "联盟广告" },
-              { value: 300, name: "视频广告" },
-            ],
+            // data: [
+            //   { value: 1048, name: "搜索引擎" },
+            //   { value: 735, name: "直接访问" },
+            //   { value: 580, name: "邮件营销" },
+            //   { value: 484, name: "联盟广告" },
+            //   { value: 300, name: "视频广告" },
+            // ],
+            data: data,
           },
         ],
       });
     },
-    getRelationEcharts() {
+    getRelationEcharts(data) {
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(document.getElementById("relation_echart"));
       // 绘制图表
@@ -205,19 +206,20 @@ export default {
           {
             // name: ["[出勤率，成绩]"],
             symbolSize: 15,
-            data: [
-              [0.1, 58.04],
-              [0.07, 60.95],
-              [0.2, 70.58],
-              [0.3, 90.5],
-              [0.9, 80.6],
-              [0.8, 76],
-              [0.4, 67],
-              [0.5, 57],
-              [0.6, 47],
-              [0.7, 97],
-              [0.8, 87],
-            ],
+            // data: [
+            //   [0.1, 58.04],
+            //   [0.07, 60.95],
+            //   [0.2, 70.58],
+            //   [0.3, 90.5],
+            //   [0.9, 80.6],
+            //   [0.8, 76],
+            //   [0.4, 67],
+            //   [0.5, 57],
+            //   [0.6, 47],
+            //   [0.7, 97],
+            //   [0.8, 87],
+            // ],
+            data: data,
             type: "scatter",
           },
         ],
@@ -226,11 +228,12 @@ export default {
   },
   created() {},
   mounted() {
-    // this.getStuAtt();
-    // this.getStuScor();
-    this.drawLine();
-    this.getStudentScoreEcharts();
-    this.getRelationEcharts();
+    this.getStuAtt();
+    this.getStuScor();
+    // this.drawLine();
+    this.getRelations();
+    // this.getStudentScoreEcharts();
+    // this.getRelationEcharts();
   },
 };
 </script>

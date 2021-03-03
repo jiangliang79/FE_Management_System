@@ -24,8 +24,18 @@
             ></el-input>
           </div>
           <div class="tips">
-            没有账号?
-            <el-button type="text" @click="goToRegister"> 去注册 </el-button>
+            <el-tooltip
+              class="forget"
+              effect="dark"
+              content="忘记密码请联系管理员"
+              placement="top"
+            >
+              <span>忘记密码</span>
+            </el-tooltip>
+            <div :style="{ fontSize: '12px' }">
+              没有账号?
+              <el-button type="text" @click="goToRegister"> 去注册 </el-button>
+            </div>
           </div>
         </div>
         <div class="login-btn">
@@ -143,8 +153,14 @@ export default {
   font-weight: 700;
 }
 .login-box .tips {
+  display: flex;
+  justify-content: space-between;
+}
+.forget {
   font-size: 12px;
-  text-align: right;
+  margin-top: 7px;
+  margin-left: 43px;
+  color: #1890ff;
 }
 .loginPage .login-btn {
   margin-top: 30px;

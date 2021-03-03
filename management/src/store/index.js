@@ -18,7 +18,7 @@ const mutations = {
         state.userInfo.type = userInfo.type;
         state.userInfo.userId = userInfo.userId;
     }
-} // mutatiions 是方法 s
+} // mutatiions 是方法
 const actions = {
     getUserInfo(context, userInfo) {
         context.commit('getUserInfo', userInfo);

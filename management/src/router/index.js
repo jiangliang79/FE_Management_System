@@ -22,7 +22,7 @@ export default new Router({
                 {
                     path: '/homePage/userManagement',
                     name: 'userManagement',
-                    component: () => import('@/view/homePage//UserManagement.vue')
+                    component: () => import('@/view/homePage/UserManagement.vue')
                 },
                 {
                     path: '/homePage/studentInfo',
