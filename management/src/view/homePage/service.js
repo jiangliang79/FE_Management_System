@@ -109,6 +109,10 @@ export const fileDownLoad = (data) => {
 export const checkTaskTable = (data) => {
     return fetch('/api/system/management/teacher/task/article/check', data,"POST")
 }
+//获取批阅实习表中的任务列表
+export const checkList = (data) => {
+    return fetch('/api/system/management/teacher/task/article/check/list', data, "GET")
+}
 // 发布任务中的任务列表
 export const getTaskList = (data) => {
     return fetch('/api/system/management/teacher/task/article/list', data,"GET")

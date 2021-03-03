@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { getFileList, checkTaskTable } from "./service";
+import { checkList, checkTaskTable } from "./service";
 import Table from "@/components/Table.vue";
 import moment from "moment";
 import { getUserInfo } from "@/utils/commonFun.js";
@@ -180,7 +180,7 @@ export default {
           pageSize: this.pageSize,
           search: this.search,
         };
-        const resp = await getFileList(params);
+        const resp = await checkList(params);
         if (resp.status === 200) {
           this.dataList = resp.data.list;
           this.total = resp.data.total;
