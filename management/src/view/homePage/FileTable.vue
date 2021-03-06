@@ -37,7 +37,6 @@
     </div>
     <UploadFileModal ref="file_modal"/>
     <EditFileModal ref="edit_modal"/>
-    </div>
   </div>
 </template>
 

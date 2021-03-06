@@ -39,7 +39,6 @@
       </Table>
     </div>
     <StudentInfoDetailModal ref="info_modal"/>
-    </div>
   </div>
 </template>
 

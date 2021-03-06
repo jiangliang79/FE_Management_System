@@ -32,7 +32,7 @@
     </div>
     <div
       id="relation_echart"
-      :style="{ width: '500px', height: '400px', margin: '10px 50px 0px 50px' }"
+      :style="{ width: '800px', height: '640px', margin: '10px 50px 0px 50px' }"
     ></div>
   </div>
 </template>
@@ -102,7 +102,7 @@ export default {
         },
         series: [
           {
-            name: "访问来源",
+            name: "",
             type: "pie",
             radius: "50%",
             // data: [
@@ -247,6 +247,6 @@ export default {
 .upload {
   margin-left: 80px;
   margin-top: 20px;
-  /* display: none; */
+  display: none;
 }
 </style>

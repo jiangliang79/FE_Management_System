@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="分配班级" :visible.sync="editFileVisible" width="550px">
+  <el-dialog title="编辑文件" :visible.sync="editFileVisible" width="550px">
     <el-form :model="form" :rules="rules">
       <el-form-item
         label="文件名称:"
