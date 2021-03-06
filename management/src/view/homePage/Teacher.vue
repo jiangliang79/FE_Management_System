@@ -36,7 +36,6 @@
       </Table>
     </div>
     <TeacherClassModal ref="classDivide_modal"/>
-    </div>
   </div>
 </template>
 

@@ -34,7 +34,6 @@
     </div>
     <ClassModal ref="class_modal"/>
     </div>
-  </div>
 </template>
 
 <script>
