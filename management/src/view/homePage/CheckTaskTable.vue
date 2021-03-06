@@ -106,7 +106,7 @@ export default {
           prop: "updateTime",
           label: "更新日期",
           formatter: (row, column, cellValue, index) => {
-            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+            return moment(cellValue).format("YYYY-MM-DD HH:mm:ss");
           },
         },
       ],

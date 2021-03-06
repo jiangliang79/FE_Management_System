@@ -57,14 +57,14 @@ export default {
           prop: "startTime",
           label: "开始时间",
           formatter: (row, column, cellValue, index) => {
-            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+            return moment(cellValue).format("YYYY-MM-DD HH:mm:ss");
           },
         },
         {
           prop: "endTime",
           label: "结束时间",
           formatter: (row, column, cellValue, index) => {
-            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+            return moment(cellValue).format("YYYY-MM-DD HH:mm:ss");
           },
         },
       ],

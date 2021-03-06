@@ -52,14 +52,14 @@ export default {
           label: "状态",
           formatter: (row, column, cellValue, index) => {
             return cellValue === 0 ? "通过" : "未通过";
-            // return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+            // return moment(cellValue).format("YYYY-MM-DD HH:mm:ss");
           },
         },
         {
           prop: "releaseTime",
           label: "上传发布时间",
           formatter: (row, column, cellValue, index) => {
-            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+            return moment(cellValue).format("YYYY-MM-DD HH:mm:ss");
           },
         },
       ],

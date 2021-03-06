@@ -73,14 +73,14 @@ export default {
           prop: "createTime",
           label: "创建时间",
           formatter: (row, column, cellValue, index) => {
-            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+            return moment(cellValue).format("YYYY-MM-DD HH:mm:ss");
           },
         },
         {
           prop: "updateTime",
           label: "修改时间",
           formatter: (row, column, cellValue, index) => {
-            return moment(cellValue).format("YYYY-MM-DD hh:mm:ss");
+            return moment(cellValue).format("YYYY-MM-DD HH:mm:ss");
           },
         },
       ],
