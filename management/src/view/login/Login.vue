@@ -27,7 +27,7 @@
             <el-tooltip
               class="forget"
               effect="dark"
-              content="忘记密码请联系管理员"
+              content="忘记密码请联系管理员重置"
               placement="top"
             >
               <span>忘记密码</span>
@@ -95,7 +95,7 @@ export default {
           });
         } else {
           this.$message({
-            message: "用户名或密码不能为空",
+            message: "用户名或密码错误",
             type: "error",
           });
         }
