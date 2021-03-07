@@ -218,9 +218,13 @@ export default {
       const resp = await getProfessionList(params);
       if (resp.status === 200) {
         this.professionList = resp.data.list;
-        // if (!this.form.professionId) {
-        // this.form.professionId = this.professionList[0].professionId;
-        // }
+        if (
+          this.professionList.findIndex(
+            (it) => it.professionId === +this.form.professionId
+          ) === -1
+        ) {
+          this.form.professionId = this.professionList[0].professionId;
+        }
         this.getAllClassList();
       }
     },
@@ -233,6 +237,13 @@ export default {
         const resp = await getClassList(params);
         if (resp.status === 200) {
           this.classList = resp.data.list;
+          if (
+            this.classList.findIndex(
+              (it) => it.classId === +this.form.classId
+            ) === -1
+          ) {
+            this.form.classId = this.classList[0].classId;
+          }
         }
       } catch (e) {}
     },
