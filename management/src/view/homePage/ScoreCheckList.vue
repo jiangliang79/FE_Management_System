@@ -31,7 +31,7 @@
               size="mini"
               type="primary"
               :style="{ 'margin-right': '10px' }"
-              @click="downloadFiles(scope.row)"
+              @click="fileDownload(scope.row)"
               >下载评定表</el-button
             >
             <el-button size="mini" type="danger" @click="uploadFile(scope.row)"
@@ -95,7 +95,7 @@ export default {
     searchData() {
       this.pageNo = 1;
       this.pageSize = 10;
-      this.getdataList();
+      this.getDataList();
     },
     // 上传发布
     uploadFile(data) {
@@ -108,10 +108,33 @@ export default {
       this.$refs.file_modal.showModal(); // 打开添加/编辑弹窗
     },
     // 文件下载
-    async downloadFiles(data) {
-      downloadFile(data);
+    async fileDownload(data) {
+      console.log(data);
+      // downloadFile(data);
+      const fileName = data.articleName;
+      fetch(
+        "/api/system/management/article/download?articleId=" + data.articleId,
+        {
+          headers: {
+            responseType: "arraybuffer",
+            authentication: window.localStorage.getItem("authentication"),
+          },
+        }
+      )
+        .then((res) => res.blob())
+        .then((data) => {
+          const downloadURL = window.URL.createObjectURL(data);
+          const a = document.createElement("a");
+          a.style.display = "none";
+          a.href = downloadURL;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(downloadURL);
+        });
     },
-    async getdataList() {
+    async getDataList() {
       try {
         let params = {
           pageNo: this.pageNo,
@@ -132,17 +155,17 @@ export default {
     // 改变页码
     handleSizeChange(pageSize) {
       this.pageSize = pageSize;
-      this.getdataList();
+      this.getDataList();
     },
     // 改变页码
     handleCurrentChange(pageNo) {
       this.pageNo = pageNo;
-      this.getdataList();
+      this.getDataList();
     },
   },
   created() {},
   mounted() {
-    this.getdataList();
+    this.getDataList();
   },
 };
 </script>

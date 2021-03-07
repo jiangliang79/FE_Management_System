@@ -99,10 +99,12 @@ export default {
     // 打开弹窗
     showModal() {
       this.classVisible = true;
+      console.log(this.form.collegeId);
+      this.getCollegeLists();
     },
     cancel() {
       this.classVisible = false;
-      this.resetForm();
+      this.operatorType === 0 && this.resetForm(); // 添加的时候才会清空填写的内容
     },
     resetForm() {
       this.form.collegeId = this.collegeList[0].collegeId;
@@ -136,7 +138,7 @@ export default {
             type: "success",
           });
           this.classVisible = false;
-          this.resetForm();
+          this.operatorType === 0 && this.resetForm();
           this.$parent.getDataList();
         }
       } catch (e) {}
@@ -150,7 +152,7 @@ export default {
         const resp = await getCollegeList(params);
         if (resp.status === 200) {
           this.collegeList = resp.data.list;
-          this.form.collegeId = this.collegeList[0].collegeId;
+          // this.form.collegeId = this.collegeList[0].collegeId;
           this.getprofessionLists();
         }
       } catch (e) {}
@@ -168,7 +170,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.getCollegeLists();
+    //
   },
 };
 </script>

@@ -19,7 +19,7 @@
         :pageNo="pageNo"
         :pageSize="pageSize"
       >
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="230px">
           <template slot-scope="scope">
             <el-button size="mini" @click="preview(scope.row)">预览</el-button>
             <el-button size="mini" type="primary" @click="taskPass(scope.row)"
@@ -35,7 +35,7 @@
     <el-dialog title="未通过原因" :visible.sync="dialogVisible">
       <el-form :model="form" :rules="rules">
         <el-form-item
-          label="未通过原因"
+          label="未通过原因:"
           :label-width="formLabelWidth"
           prop="remark"
         >
@@ -75,7 +75,7 @@ export default {
       form: {
         remark: "",
       },
-      formLabelWidth: "85px",
+      formLabelWidth: "100px",
       rules: {
         remark: [
           { required: true, message: "请输入未通过原因", trigger: "blur" },

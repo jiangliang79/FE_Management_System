@@ -24,6 +24,7 @@
         :before-remove="beforeRemove"
         :headers="headers"
         :data="datas"
+        :on-success="handleSuccess"
         multiple
         :file-list="fileList"
       >
@@ -52,6 +53,7 @@ export default {
       datas: {},
       action: "",
       type: 2,
+      uploadStatus: 0,
     };
   },
   computed: {},
@@ -70,7 +72,16 @@ export default {
     // },
     handleOk() {
       this.uploadFileVisible = false;
+      if (this.uploadStatus === 200) {
+        this.$message({
+          message: "发布成功",
+          type: "success",
+        });
+      }
       this.$parent.getDataList();
+    },
+    handleSuccess(response) {
+      this.uploadStatus = response.status;
     },
     handleRemove(file, fileList) {},
     beforeRemove(file, fileList) {

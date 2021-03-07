@@ -1,7 +1,7 @@
 <template>
   <div class="class">
     <div class="search">
-        <el-input
+      <el-input
         v-model="search"
         prefix-icon="el-icon-search"
         size="medium"
@@ -25,15 +25,18 @@
             <el-button size="mini" type="primary" @click="editClass(scope.row)"
               >编辑</el-button
             >
-            <el-button size="mini" type="danger" @click="openDeleteModal(scope.row)"
+            <el-button
+              size="mini"
+              type="danger"
+              @click="openDeleteModal(scope.row)"
               >删除</el-button
             >
           </template>
         </el-table-column>
       </Table>
     </div>
-    <ClassModal ref="class_modal"/>
-    </div>
+    <ClassModal ref="class_modal" />
+  </div>
 </template>
 
 <script>
@@ -99,6 +102,7 @@ export default {
     editClass(data) {
       this.$refs.class_modal.operatorType = 1;
       this.$refs.class_modal.form = data;
+      console.log(this.$refs.class_modal.form.collegeId);
       this.$refs.class_modal.showModal();
     },
     openDeleteModal(data) {
@@ -151,13 +155,6 @@ export default {
   mounted() {
     this.getDataList();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
 };
 </script>
 <style lang='css' scoped>

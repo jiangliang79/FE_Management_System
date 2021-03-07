@@ -48,6 +48,7 @@
           v-model="form.professionId"
           placeholder="请选择所属专业"
           :style="{ width: '100%' }"
+          @change="getAllClassList"
         >
           <el-option
             :label="item.professionName"
@@ -202,10 +203,11 @@ export default {
         isAll: true,
       };
       const resp = await getCollegeList(params);
-      console.log(111, resp);
       if (resp.status === 200) {
         this.collegeList = resp.data.list;
+        // if (!this.form.collegeId) {
         this.form.collegeId = this.collegeList[0].collegeId;
+        // }
         this.getprofessionLists();
       }
     },
@@ -217,7 +219,9 @@ export default {
       const resp = await getProfessionList(params);
       if (resp.status === 200) {
         this.professionList = resp.data.list;
+        // if (!this.form.professionId) {
         this.form.professionId = this.professionList[0].professionId;
+        // }
         this.getAllClassList();
       }
     },

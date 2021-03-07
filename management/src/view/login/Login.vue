@@ -77,7 +77,6 @@ export default {
         password: this.password,
       };
       const resp = await login(params);
-      console.log(resp);
       if (resp.status === 200) {
         if (resp.data.loginStatus === 0) {
           this.username = resp.data.username;
