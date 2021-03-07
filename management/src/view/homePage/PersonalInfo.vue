@@ -183,7 +183,6 @@ export default {
             this.type = "view";
           }
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
@@ -206,7 +205,7 @@ export default {
       if (resp.status === 200) {
         this.collegeList = resp.data.list;
         // if (!this.form.collegeId) {
-        this.form.collegeId = this.collegeList[0].collegeId;
+        // this.form.collegeId = this.collegeList[0].collegeId;
         // }
         this.getprofessionLists();
       }
@@ -220,7 +219,7 @@ export default {
       if (resp.status === 200) {
         this.professionList = resp.data.list;
         // if (!this.form.professionId) {
-        this.form.professionId = this.professionList[0].professionId;
+        // this.form.professionId = this.professionList[0].professionId;
         // }
         this.getAllClassList();
       }
