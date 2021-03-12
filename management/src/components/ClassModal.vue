@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="operatorType === 0 ? '添加班级信息' : '编辑班级信息'"
+    :title="operatorType == 0 ? '添加班级信息' : '编辑班级信息'"
     :visible.sync="classVisible"
     width="550px"
   >
