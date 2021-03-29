@@ -114,6 +114,7 @@ export default {
           operatorType: this.operatorType,
           collegeId: this.form.collegeId,
           professionName: this.form.professionName,
+          description: this.form.description,
         };
         params = Object.assign(
           params,
